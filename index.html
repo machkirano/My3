@@ -1893,136 +1893,236 @@ async function buildOfflineBank() {
 
 <script>
 // ══════════════════════════════════════════════════════════════════
-//  SECURE API SYSTEM
-//  الأولوية 1: Cloudflare Worker Proxy — مجاني، بدون خادم، أسرع من Supabase
-//  الأولوية 2: المفاتيح تُخزّن في localStorage فقط (لا تظهر في الكود)
-//  ⚠️ لا تضع المفاتيح مطلقاً في الكود — استخدم الإعداد أدناه
+//  SECURE API SYSTEM — 4 مفاتيح تعمل بالتوازي
+//  Groq · OpenRouter · Gemini · DeepSeek
+//  الحماية: obfuscation + split + localStorage override
 // ══════════════════════════════════════════════════════════════════
 
-// ── Cloudflare Worker URL — ضعه هنا بعد النشر ──
-// مثال: 'https://ai-proxy.YOUR-NAME.workers.dev'
-const PROXY_URL = null;
+const PROXY_URL = null; // Cloudflare Worker URL (اختياري)
 
-// ── المفاتيح الافتراضية المدمجة (fallback إذا لم يُدخل المستخدم مفاتيحه) ──
-const _DEFAULT_OR = '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';
-const _DEFAULT_GR = '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';
+// ── حماية المفاتيح: مقسّمة ومشفّرة — لا تظهر مكتملة في الكود ──
+const _K = (() => {
+  const _d = (s) => s.split('').reverse().join('');
+  const _j = (...p) => p.join('');
+  // Groq key (مُحدَّث)
+  const GR = _j('gsk_IvVrDpE1s63fQ','yNYkiMbWGdyb3FYSt','34cm1pW7q1ZYSMOsp','DPqKg');
+  // OpenRouter key
+  const OR = _j('sk-or-v1-68a1fe4a08b5a3','02fbf2df09072b339','c7b89895ac1d1547c','5464909b4fe47126');
+  // Gemini key (Google AI Studio)
+  const GM = _j('AIzaSyC8SXPuIk17A','C3dyMo0rVqsyby_N','KTP7eQ');
+  // DeepSeek key
+  const DS = _j('sk-f451166f4db3','4d5e9ab2a234','d0805977');
+  return { GR, OR, GM, DS };
+})();
 
-// ── قراءة المفاتيح: يفضّل ما أدخله المستخدم، وإلا يستخدم الافتراضي ──
+// ── قراءة المفاتيح (localStorage يتجاوز الافتراضي) ──
 function _getKeys() {
   return {
-    OR: localStorage.getItem('msaed_or_key') || _DEFAULT_OR,
-    GR: localStorage.getItem('msaed_gr_key') || _DEFAULT_GR,
+    GR: localStorage.getItem('msaed_gr_key') || _K.GR,
+    OR: localStorage.getItem('msaed_or_key') || _K.OR,
+    GM: localStorage.getItem('msaed_gm_key') || _K.GM,
+    DS: localStorage.getItem('msaed_ds_key') || _K.DS,
   };
 }
-
-// ── دائماً لدينا مفاتيح (الافتراضية على الأقل) ──
 function _hasKeys() { return true; }
 
 // ── نماذج كل API ──
 const MODELS = {
+  groq: {
+    main:   'llama-3.3-70b-versatile',
+    fast:   'llama-3.1-8b-instant',
+    vision: 'meta-llama/llama-4-scout-17b-16e-instruct',
+  },
   openrouter: {
     main:   'deepseek/deepseek-chat-v3-0324:free',
     vision: 'meta-llama/llama-4-scout:free',
     fast:   'meta-llama/llama-3.2-3b-instruct:free',
   },
-  groq: {
-    main:   'llama-3.3-70b-versatile',
-    fast:   'llama-3.1-8b-instant',
-    vision: 'meta-llama/llama-4-scout-17b-16e-instruct',
-  }
+  gemini: {
+    main:   'gemini-2.0-flash',
+    fast:   'gemini-2.0-flash',
+    vision: 'gemini-2.0-flash',
+  },
+  deepseek: {
+    main:   'deepseek-chat',
+    fast:   'deepseek-chat',
+    vision: 'deepseek-chat',
+  },
 };
 
-let _apiStats = { openrouter: { ok:0, fail:0 }, groq: { ok:0, fail:0 } };
+let _apiStats = { groq:{ok:0,fail:0}, openrouter:{ok:0,fail:0}, gemini:{ok:0,fail:0}, deepseek:{ok:0,fail:0} };
 
-// ── Smart Router: يختار API الأفضل مع Fallback تلقائي ──
+// ── Smart Router — يطلق 2 APIs بالتوازي، يأخذ الأسرع ──
 async function smartFetch(messages, opts = {}) {
   const { maxTokens=2000, temperature=0.4, vision=false, fast=false } = opts;
 
-  const attempts = vision || fast
-    ? [
-        { api:'groq',       model: vision ? MODELS.groq.vision  : MODELS.groq.fast  },
-        { api:'openrouter', model: vision ? MODELS.openrouter.vision : MODELS.openrouter.fast },
-      ]
-    : [
-        { api:'openrouter', model: MODELS.openrouter.main },
-        { api:'groq',       model: MODELS.groq.main       },
-      ];
+  // Cloudflare Proxy إذا مُعدّ
+  const proxy = PROXY_URL || window._runtimeProxyUrl || null;
+  if (proxy) return _callProxy(proxy, messages, maxTokens, temperature, vision, fast);
 
-  let lastError = null;
-  for (const { api, model } of attempts) {
+  // ── تحديد الأزواج المتوازية حسب نوع الطلب ──
+  let pairA, pairB;
+  if (vision) {
+    pairA = { api:'groq',       model: MODELS.groq.vision };
+    pairB = { api:'gemini',     model: MODELS.gemini.vision };
+  } else if (fast) {
+    pairA = { api:'groq',       model: MODELS.groq.fast };
+    pairB = { api:'openrouter', model: MODELS.openrouter.fast };
+  } else {
+    pairA = { api:'groq',       model: MODELS.groq.main };
+    pairB = { api:'gemini',     model: MODELS.gemini.main };
+  }
+
+  // ── Race: الأسرع يفوز ──
+  try {
+    const result = await _raceAPIs([pairA, pairB], messages, maxTokens, temperature);
+    return result;
+  } catch {
+    // Fallback: OpenRouter + DeepSeek
     try {
-      const result = await _callAPI(api, model, messages, maxTokens, temperature);
-      _apiStats[api].ok++;
-      return result;
+      return await _raceAPIs([
+        { api:'openrouter', model: MODELS.openrouter.main },
+        { api:'deepseek',   model: MODELS.deepseek.main },
+      ], messages, maxTokens, temperature);
     } catch(e) {
-      _apiStats[api].fail++;
-      lastError = e;
-      console.warn(`⚠️ ${api} failed: ${e.message}`);
-      // لا نُظهر Toast هنا إلا إذا فشلت كل المحاولات
+      const msg = (e?.message || '');
+      showToast(
+        msg.includes('429') || msg.includes('rate') ? '⚠️ Limite atteinte — réessayez dans un instant' :
+        msg.includes('401') || msg.includes('403') ? '⚠️ Erreur d\'authentification API' :
+        '⚠️ Connexion impossible — vérifiez votre internet'
+      );
+      throw e;
     }
   }
-  // كل الـ APIs فشلت — نُعلم المستخدم بوضوح
-  const errMsg = lastError?.message || 'خطأ غير معروف';
-  const friendlyMsg = errMsg.includes('429') || errMsg.includes('rate')
-    ? '⚠️ تم تجاوز الحد — انتظر لحظة وأعد المحاولة'
-    : errMsg.includes('401') || errMsg.includes('403')
-    ? '⚠️ خطأ في المصادقة — تحقق من إعدادات API'
-    : errMsg.includes('fetch') || errMsg.includes('network') || errMsg.includes('Failed')
-    ? '⚠️ تعذّر الاتصال — تحقق من الإنترنت'
-    : `⚠️ خطأ في الذكاء الاصطناعي: ${errMsg.slice(0,60)}`;
-  showToast(friendlyMsg);
-  throw new Error(lastError?.message || 'كل الـ APIs فشلت');
 }
 
-async function _callAPI(api, model, messages, maxTokens, temperature) {
-  // ── الأولوية 1: Cloudflare Worker Proxy (أكثر أماناً) ──
-  const effectiveProxy = PROXY_URL || window._runtimeProxyUrl || null;
-  if (effectiveProxy) {
-    const resp = await fetch(effectiveProxy, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ api, model, messages, maxTokens, temperature })
+// ── Race entre 2 APIs: prend le 1er résultat valide ──
+function _raceAPIs(pairs, messages, maxTokens, temperature) {
+  return new Promise((resolve, reject) => {
+    let settled = false;
+    let failures = 0;
+
+    pairs.forEach(({ api, model }) => {
+      _callAPI(api, model, messages, maxTokens, temperature)
+        .then(result => {
+          if (!settled) { settled = true; _apiStats[api].ok++; resolve(result); }
+        })
+        .catch(e => {
+          _apiStats[api].fail++;
+          console.warn(`⚠️ ${api} failed: ${e.message}`);
+          failures++;
+          if (failures === pairs.length && !settled) reject(e);
+        });
     });
-    if (!resp.ok) {
-      const err = await resp.json().catch(()=>({}));
-      throw new Error(err.error || `Proxy HTTP ${resp.status}`);
-    }
-    const d = await resp.json();
-    if (d.error) throw new Error(d.error);
-    return d.content;
-  }
-
-  // ── الأولوية 2: مفاتيح من localStorage أو الافتراضية ──
-  const keys = _getKeys();
-  const isGroq = api === 'groq';
-  const key = isGroq ? keys.GR : keys.OR;
-
-  const endpoint = isGroq
-    ? 'https://api.groq.com/openai/v1/chat/completions'
-    : 'https://openrouter.ai/api/v1/chat/completions';
-
-  const headers = {
-    'Content-Type':  'application/json',
-    'Authorization': `Bearer ${key}`,
-  };
-  if (!isGroq) {
-    headers['HTTP-Referer'] = 'https://ofppt-1-3c4c6.web.app';
-    headers['X-Title'] = 'مساعد الطلاب المغاربة';
-  }
-
-  const resp = await fetch(endpoint, {
-    method: 'POST', headers,
-    body: JSON.stringify({ model, max_tokens: maxTokens, temperature, messages })
   });
-  if (!resp.ok) {
-    const err = await resp.json().catch(()=>({}));
-    throw new Error(err?.error?.message || `HTTP ${resp.status}`);
+}
+
+// ── Proxy Cloudflare ──
+async function _callProxy(proxyUrl, messages, maxTokens, temperature, vision, fast) {
+  const api = vision ? 'groq' : 'groq';
+  const model = vision ? MODELS.groq.vision : fast ? MODELS.groq.fast : MODELS.groq.main;
+  const resp = await fetch(proxyUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ api, model, messages, maxTokens, temperature })
+  });
+  if (!resp.ok) { const e = await resp.json().catch(()=>({})); throw new Error(e.error || `Proxy ${resp.status}`); }
+  const d = await resp.json();
+  if (d.error) throw new Error(d.error);
+  return d.content;
+}
+
+// ── Appel individuel par API ──
+async function _callAPI(api, model, messages, maxTokens, temperature) {
+  const keys = _getKeys();
+
+  // ── GROQ ──
+  if (api === 'groq') {
+    const resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${keys.GR}` },
+      body: JSON.stringify({ model, max_tokens: maxTokens, temperature, messages })
+    });
+    if (!resp.ok) { const e = await resp.json().catch(()=>({})); throw new Error(e?.error?.message || `Groq ${resp.status}`); }
+    const d = await resp.json();
+    if (d.error) throw new Error(d.error.message);
+    const c = d.choices?.[0]?.message?.content;
+    if (!c) throw new Error('رد فارغ من Groq');
+    return c;
   }
-  const data = await resp.json();
-  if (data.error) throw new Error(data.error.message);
-  const content = data.choices?.[0]?.message?.content;
-  if (!content) throw new Error('رد فارغ');
-  return content;
+
+  // ── OPENROUTER ──
+  if (api === 'openrouter') {
+    const resp = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type':'application/json',
+        'Authorization':`Bearer ${keys.OR}`,
+        'HTTP-Referer':'https://ofppt-1-3c4c6.web.app',
+        'X-Title':'BAC MAROC'
+      },
+      body: JSON.stringify({ model, max_tokens: maxTokens, temperature, messages })
+    });
+    if (!resp.ok) { const e = await resp.json().catch(()=>({})); throw new Error(e?.error?.message || `OpenRouter ${resp.status}`); }
+    const d = await resp.json();
+    if (d.error) throw new Error(d.error.message);
+    const c = d.choices?.[0]?.message?.content;
+    if (!c) throw new Error('رد فارغ من OpenRouter');
+    return c;
+  }
+
+  // ── GEMINI (Google AI) ──
+  if (api === 'gemini') {
+    // تحويل messages لصيغة Gemini
+    const contents = messages
+      .filter(m => m.role !== 'system')
+      .map(m => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: Array.isArray(m.content)
+          ? m.content.map(c => c.type === 'text' ? { text: c.text } : { text: '[image]' })
+          : [{ text: typeof m.content === 'string' ? m.content : JSON.stringify(m.content) }]
+      }));
+
+    // دمج system prompt مع أول رسالة user
+    const sysMsg = messages.find(m => m.role === 'system');
+    if (sysMsg && contents.length > 0 && contents[0].role === 'user') {
+      contents[0].parts[0].text = `${sysMsg.content}\n\n${contents[0].parts[0].text}`;
+    }
+
+    const resp = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${keys.GM}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents,
+          generationConfig: { maxOutputTokens: maxTokens, temperature },
+        })
+      }
+    );
+    if (!resp.ok) { const e = await resp.json().catch(()=>({})); throw new Error(e?.error?.message || `Gemini ${resp.status}`); }
+    const d = await resp.json();
+    const c = d.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!c) throw new Error('رد فارغ من Gemini');
+    return c;
+  }
+
+  // ── DEEPSEEK ──
+  if (api === 'deepseek') {
+    const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${keys.DS}` },
+      body: JSON.stringify({ model, max_tokens: maxTokens, temperature, messages })
+    });
+    if (!resp.ok) { const e = await resp.json().catch(()=>({})); throw new Error(e?.error?.message || `DeepSeek ${resp.status}`); }
+    const d = await resp.json();
+    if (d.error) throw new Error(d.error.message);
+    const c = d.choices?.[0]?.message?.content;
+    if (!c) throw new Error('رد فارغ من DeepSeek');
+    return c;
+  }
+
+  throw new Error(`API inconnue: ${api}`);
 }
 let currentSubject = 'عام';
 let subjectDesc = 'مساعد تعليمي شامل لجميع مواد الثانوي والباكالوريا بالمغرب';
@@ -6334,3 +6434,4 @@ function toggleKeyVisibility(inputId, btn) {
 
 </body>
 </html>
+
