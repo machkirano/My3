@@ -353,36 +353,6 @@ body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min
 .fav-delete{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:0 4px;transition:color 0.2s;flex-shrink:0;}
 .fav-delete:hover{color:var(--danger);}
 
-/* ══ NEW FEATURES CSS ══ */
-/* Challenge */
-.challenge-opt{width:100%;padding:12px 15px;margin:5px 0;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;text-align:left;cursor:pointer;transition:all 0.18s;display:flex;align-items:center;gap:10px;}
-.challenge-opt:hover:not(:disabled){background:var(--surface2);border-color:var(--accent3);}
-.challenge-opt.correct{background:rgba(74,222,128,0.1)!important;border-color:var(--accent)!important;color:var(--accent)!important;}
-.challenge-opt.wrong{background:rgba(248,81,73,0.1)!important;border-color:var(--danger)!important;color:var(--danger)!important;}
-.challenge-opt:disabled{cursor:not-allowed;}
-/* Leaderboard */
-.lb-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:6px;transition:all 0.2s;}
-.lb-row:hover{border-color:rgba(245,158,11,0.3);}
-.lb-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
-/* Methodo cards */
-.methodo-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:10px;}
-.methodo-card-head{padding:12px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background 0.2s;}
-.methodo-card-head:hover{background:var(--surface2);}
-.methodo-card-body{display:none;padding:0 16px 14px;font-size:12.5px;line-height:1.9;color:var(--text);}
-.methodo-card-body.open{display:block;}
-.methodo-step{background:rgba(74,222,128,0.04);border-right:3px solid var(--accent);border-radius:0 8px 8px 0;padding:8px 12px;margin:6px 0;font-size:12px;}
-/* Pomodoro */
-#pomodoro-display.break-mode{color:var(--purple) !important;}
-/* Fuzzy search bar */
-.global-search-wrap{position:relative;padding:6px 14px;background:rgba(13,17,23,0.95);border-bottom:1px solid var(--border);}
-.global-search-inp{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:8px 14px 8px 36px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;outline:none;box-sizing:border-box;}
-.global-search-inp:focus{border-color:var(--accent2);}
-.search-icon{position:absolute;left:26px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none;}
-.search-results{position:absolute;top:100%;left:0;right:0;background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;z-index:500;max-height:280px;overflow-y:auto;display:none;}
-.search-result-item{padding:10px 16px;cursor:pointer;font-size:12px;color:var(--text);border-bottom:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;gap:8px;}
-.search-result-item:hover{background:var(--surface2);}
-/* Voice note */
-.voice-recording{animation:pulse 0.8s infinite;border-color:var(--danger)!important;background:rgba(248,81,73,0.1)!important;}
 /* ══ APPRENTISSAGE DES LANGUES — Cyber-noir ══ */
 .lang-card {
   position: relative;
@@ -1236,27 +1206,21 @@ async function buildOfflineBank() {
 <body>
 
 <div class="header">
-  <div class="logo" style="padding:0;overflow:hidden;flex-shrink:0;"><img src="data:image/jpeg;base64,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" alt="BAC MAROC" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
+  <div class="logo" style="padding:0;overflow:hidden;"><img src="data:image/jpeg;base64,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" alt="BAC MAROC" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"></div>
   <div class="header-info" style="flex:1;min-width:0;overflow:hidden;">
     <h1 id="headerTitle" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">BAC MAROC</h1>
+    <p id="headerSub" class="header-sub">الثانوي الإعدادي • الثانوي التأهيلي • الباكالوريا</p>
   </div>
-  <button id="userAvatarBtn" onclick="toggleDropdown()" style="width:32px;height:32px;border-radius:50%;border:2px solid var(--border);background:var(--surface2);overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:all 0.2s;">👤</button>
-  <button id="headerLoginBtn" class="header-login-btn" onclick="showLoginScreen()" title="Se connecter">
+  <div class="status" style="flex-shrink:0;"><div class="status-dot"></div><span id="statusTxt" class="status-text">متصل وجاهز</span></div>
+  <button id="userAvatarBtn" onclick="toggleDropdown()" style="width:34px;height:34px;border-radius:50%;border:2px solid var(--border);background:var(--surface2);overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:all 0.2s;">👤</button>
+  <!-- زر تسجيل الدخول في الهيدر — يظهر دائماً للزائر -->
+  <button id="headerLoginBtn" class="header-login-btn" onclick="showLoginScreen()" title="تسجيل الدخول بـ Google">
     <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-    <span class="login-text">Google</span>
+    <span class="login-text">دخول</span>
   </button>
-  <button id="langBtn" onclick="toggleLang()" style="background:rgba(255,255,255,0.07);border:1px solid var(--border);border-radius:20px;padding:4px 10px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;transition:all 0.2s;flex-shrink:0;">🇲🇦 AR</button>
-  <div style="position:relative;flex-shrink:0;">
-    <button id="toolsMenuBtn" onclick="toggleToolsMenu()" title="Outils" style="width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;line-height:1;">⋯</button>
-    <div id="toolsMenu" style="display:none;position:fixed;top:56px;right:8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:6px;min-width:170px;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,0.7);">
-      <button onclick="toggleGlobalSearch();toggleToolsMenu()" style="width:100%;padding:8px 12px;background:none;border:none;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;border-radius:7px;display:flex;align-items:center;gap:8px;">🔍 Recherche</button>
-      <button onclick="toggleVoiceNote();toggleToolsMenu()" id="voiceNoteBtn" style="width:100%;padding:8px 12px;background:none;border:none;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;border-radius:7px;display:flex;align-items:center;gap:8px;">🎙️ Note vocale</button>
-      <button onclick="toggleLowData();toggleToolsMenu()" id="lowDataBtn" style="width:100%;padding:8px 12px;background:none;border:none;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;border-radius:7px;display:flex;align-items:center;gap:8px;">📡 Mode éco</button>
-      <button onclick="openApiSetupModal();toggleToolsMenu()" style="width:100%;padding:8px 12px;background:none;border:none;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;border-radius:7px;display:flex;align-items:center;gap:8px;">🔑 Clés API</button>
-      <div style="height:1px;background:var(--border);margin:4px 0;"></div>
-      <button onclick="clearHistory();toggleToolsMenu()" style="width:100%;padding:8px 12px;background:none;border:none;color:var(--muted);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;border-radius:7px;display:flex;align-items:center;gap:8px;">💾 <span id="msgCount">0</span> msgs — Effacer</button>
-    </div>
-  </div>
+      <button onclick="toggleLowData()" id="lowDataBtn"  title="الوضع الاقتصادي" style="width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;">📡</button>
+      <button id="langBtn"  onclick="toggleLang()" style="background:rgba(255,255,255,0.07);border:1px solid var(--border);border-radius:20px;padding:5px 12px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;transition:all 0.2s;flex-shrink:0;">🇲🇦 AR</button>
+  <span class="storage-badge" id="storageBadge" onclick="clearHistory()" title="حذف المحادثات المحفوظة">💾 <span id="msgCount">0</span></span>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -1357,12 +1321,6 @@ async function buildOfflineBank() {
   <!-- CHAT -->
   <div class="chat-area">
     <div class="level-bar" id="levelBar">📚 كل المواد — مساعدة شاملة</div>
-    <!-- Global Smart Search -->
-    <div class="global-search-wrap" id="globalSearchWrap" style="display:none;">
-      <span class="search-icon">🔍</span>
-      <input class="global-search-inp" id="globalSearchInp" type="text" placeholder="Rechercher un examen, cours, sujet..." oninput="globalSearch(this.value)" onblur="setTimeout(()=>hideSearchResults(),200)">
-      <div class="search-results" id="searchResults"></div>
-    </div>
     <div class="tabs-bar">
       <button class="tab-btn active" id="tab-chat" onclick="switchTab('chat')">💬 المساعد</button>
       <button class="tab-btn" id="tab-videos" onclick="switchTab('videos')">🎬 فيديو</button>
@@ -1375,10 +1333,6 @@ async function buildOfflineBank() {
       <button class="tab-btn" id="tab-favorites" onclick="switchTab('favorites')">⭐ مفضلتي</button>
       <button class="tab-btn" id="tab-scanner" onclick="switchTab('scanner')">📷 ماسح</button>
       <button class="tab-btn" id="tab-langues" onclick="switchTab('langues')">🌍 Langues</button>
-      <button class="tab-btn" id="tab-challenge" onclick="switchTab('challenge')">⚔️ Défi</button>
-      <button class="tab-btn" id="tab-countdown" onclick="switchTab('countdown')">⏳ Compte à rebours</button>
-      <button class="tab-btn" id="tab-methodo" onclick="switchTab('methodo')">📐 Méthodologie</button>
-      <button class="tab-btn" id="tab-orientation" onclick="switchTab('orientation')">🎓 Orientation</button>
     </div>
 
     <!-- TAB: CHAT -->
@@ -1386,8 +1340,8 @@ async function buildOfflineBank() {
     <div class="messages" id="messages">
       <div class="welcome-card" id="welcomeCard">
         <div class="big-emoji"><img src="data:image/jpeg;base64,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" alt="BAC MAROC" style="width:64px;height:64px;object-fit:cover;border-radius:14px;display:inline-block;"></div>
-        <h2 id="welcomeTitle">Bienvenue dans BAC MAROC !</h2>
-        <p id="welcomeDesc">Je suis ici pour t'aider dans toutes les matières du <strong>collège, lycée et baccalauréat</strong><br>Choisis une matière et pose-moi n'importe quelle question 📖</p>
+        <h2 id="welcomeTitle">مرحباً بك في مساعد الطلاب المغاربة!</h2>
+        <p id="welcomeDesc">أنا هنا لمساعدتك في جميع مواد <strong>الثانوي الإعدادي والتأهيلي والباكالوريا</strong><br>اختر المادة من القائمة واسألني أي سؤال 📖</p>
         <div class="quick-actions" id="quickActions"></div>
       </div>
     </div>
@@ -1407,7 +1361,7 @@ async function buildOfflineBank() {
 
     <div class="input-area">
       <div class="input-wrapper">
-        <textarea id="userInput" placeholder="Écris ta question ici... Ex: Explique-moi la dérivée" rows="1"
+        <textarea id="userInput" placeholder="اكتب سؤالك هنا... مثال: اشرح لي المعادلة التفاضلية" rows="1"
           onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
         <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
       </div>
@@ -1862,185 +1816,6 @@ async function buildOfflineBank() {
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════
-     TAB: DÉFI AMIS — Gamification & Leaderboard
-══════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="panel-challenge">
-  <div class="vlib">
-    <div class="vlib-header">
-      <h3 style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">⚔️ Défi entre amis</h3>
-      <p>Affronte tes camarades en QCM — Grimpe dans le classement national 🇲🇦</p>
-    </div>
-    <!-- Leaderboard -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Votre rang</div>
-        <div id="challenge-my-rank" style="font-size:28px;font-weight:900;color:var(--accent3);">—</div>
-        <div style="font-size:10px;color:var(--muted);">National 🇲🇦</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Points totaux</div>
-        <div id="challenge-my-pts" style="font-size:28px;font-weight:900;color:var(--accent);">0</div>
-        <div style="font-size:10px;color:var(--muted);">XP gagnés</div>
-      </div>
-    </div>
-    <!-- Quick challenge button -->
-    <div style="background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(239,68,68,0.05));border:1px solid rgba(245,158,11,0.25);border-radius:14px;padding:20px;text-align:center;margin-bottom:16px;">
-      <div style="font-size:32px;margin-bottom:8px;">⚔️</div>
-      <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px;">Défi Éclair — 60 secondes</div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:14px;">10 questions QCM dans la matière de ton choix</div>
-      <select id="challenge-subject-sel" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;margin-bottom:12px;">
-        <option>Mathématiques</option><option>Physique-Chimie</option><option>SVT</option>
-        <option>Histoire-Géo</option><option>Français</option><option>Philosophie</option>
-      </select>
-      <button onclick="startFlashChallenge()" style="width:100%;padding:12px;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;border-radius:10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:15px;font-weight:700;cursor:pointer;">⚡ Lancer le défi</button>
-    </div>
-    <!-- Leaderboard table -->
-    <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;">🏆 Classement Top 10</div>
-    <div id="leaderboard-list"></div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════
-     TAB: COMPTE À REBOURS INTELLIGENT
-══════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="panel-countdown">
-  <div class="vlib">
-    <div class="vlib-header">
-      <h3>⏳ Compte à rebours BAC</h3>
-      <p>Plan de révision intelligent basé sur les jours restants</p>
-    </div>
-    <!-- Date BAC input -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;">
-      <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:6px;">📅 Date de votre BAC</label>
-      <input type="date" id="bac-date-input" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;box-sizing:border-box;">
-      <button onclick="saveBacDate()" style="margin-top:10px;width:100%;padding:10px;background:linear-gradient(135deg,var(--accent),#16a34a);border:none;border-radius:8px;color:#000;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">💾 Enregistrer</button>
-    </div>
-    <!-- Countdown display -->
-    <div id="countdown-display" style="text-align:center;padding:24px;background:linear-gradient(135deg,rgba(74,222,128,0.06),rgba(34,211,238,0.04));border:1px solid rgba(74,222,128,0.15);border-radius:16px;margin-bottom:16px;">
-      <div style="font-size:56px;font-weight:900;font-family:monospace;color:var(--accent);" id="days-left">—</div>
-      <div style="font-size:14px;color:var(--muted);">jours avant le BAC</div>
-      <!-- Progress bar -->
-      <div style="margin-top:12px;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;">
-        <div id="bac-progress-bar" style="height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width 0.8s;width:0%;"></div>
-      </div>
-    </div>
-    <!-- AI daily suggestion -->
-    <div style="font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:10px;">🧠 Plan de révision du jour (IA)</div>
-    <div id="daily-plan-area" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;min-height:80px;">
-      <div style="color:var(--muted);font-size:12px;">Enregistrez votre date BAC pour recevoir un plan personnalisé.</div>
-    </div>
-    <button onclick="generateDailyPlan()" id="plan-btn" style="margin-top:10px;width:100%;padding:10px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.25);border-radius:8px;color:var(--accent2);font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;display:none;">✨ Générer mon plan du jour</button>
-    <!-- Pomodoro Timer -->
-    <div style="margin-top:20px;font-size:13px;font-weight:700;color:var(--purple);margin-bottom:10px;">🍅 Pomodoro — Pause intelligente</div>
-    <div style="background:var(--surface);border:1px solid rgba(167,139,250,0.2);border-radius:12px;padding:16px;text-align:center;">
-      <div id="pomodoro-display" style="font-size:48px;font-weight:900;font-family:monospace;color:var(--purple);">25:00</div>
-      <div id="pomodoro-label" style="font-size:12px;color:var(--muted);margin-bottom:12px;">⏱️ Session de travail</div>
-      <div style="display:flex;gap:8px;justify-content:center;">
-        <button onclick="pomodoroToggle()" id="pomo-btn" style="padding:9px 20px;background:linear-gradient(135deg,var(--purple),var(--pink));border:none;border-radius:8px;color:#fff;font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;">▶ Démarrer</button>
-        <button onclick="pomodoroReset()" style="padding:9px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:13px;cursor:pointer;font-family:'Tajawal',sans-serif;">↺ Reset</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════
-     TAB: MÉTHODOLOGIES
-══════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="panel-methodo">
-  <div class="vlib">
-    <div class="vlib-header">
-      <h3>📐 Méthodologies BAC</h3>
-      <p>Guides complets pour maîtriser les méthodes des grandes épreuves</p>
-    </div>
-    <!-- Search bar -->
-    <div style="position:relative;margin-bottom:16px;">
-      <input type="text" id="methodo-search" placeholder="🔍 Rechercher une méthode..." oninput="filterMethodo(this.value)"
-        style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;box-sizing:border-box;outline:none;">
-    </div>
-    <div id="methodo-cards" style="display:flex;flex-direction:column;gap:10px;"></div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════
-     TAB: ORIENTATION
-══════════════════════════════════════════════════════ -->
-<div class="tab-panel" id="panel-orientation">
-  <div class="vlib">
-    <div class="vlib-header">
-      <h3 style="background:linear-gradient(135deg,var(--accent2),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">🎓 Orientation Post-BAC</h3>
-      <p>L'IA analyse votre profil et recommande les meilleures filières</p>
-    </div>
-    <!-- Profile form -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px;">
-      <div style="font-size:13px;font-weight:700;color:var(--accent2);margin-bottom:14px;">📊 Votre profil académique</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
-        <div>
-          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Filière BAC</label>
-          <select id="orient-filiere" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:8px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;">
-            <option>Sciences Expérimentales</option><option>Sciences Maths A</option>
-            <option>Sciences Maths B</option><option>Lettres & SC. Humaines</option>
-            <option>Sciences Éco & Gestion</option><option>Sciences & Tech. Élec.</option>
-          </select>
-        </div>
-        <div>
-          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Moyenne générale</label>
-          <input type="number" id="orient-moyenne" min="0" max="20" step="0.5" placeholder="Ex: 15.5"
-            style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:8px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;box-sizing:border-box;">
-        </div>
-      </div>
-      <div style="margin-bottom:12px;">
-        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Matières préférées</label>
-        <input type="text" id="orient-matieres" placeholder="Ex: Maths, Physique, Informatique"
-          style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:8px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;box-sizing:border-box;">
-      </div>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px;">Domaine d'intérêt</label>
-        <select id="orient-domaine" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:8px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:12px;">
-          <option>Ingénierie & Technologie</option><option>Médecine & Santé</option>
-          <option>Commerce & Finance</option><option>Architecture & Design</option>
-          <option>Informatique & IA</option><option>Sciences Fondamentales</option>
-          <option>Lettres & Sciences Humaines</option><option>Droit</option>
-        </select>
-      </div>
-      <button onclick="generateOrientation()" style="width:100%;padding:12px;background:linear-gradient(135deg,var(--accent2),var(--purple));border:none;border-radius:10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">🤖 Analyser mon profil</button>
-    </div>
-    <div id="orientation-result"></div>
-  </div>
-</div>
-
-<!-- Flash Challenge Modal -->
-<div id="flashChallengeModal" style="display:none;position:fixed;inset:0;z-index:2001;background:rgba(0,0,0,0.9);align-items:center;justify-content:center;padding:12px;">
-  <div style="background:#0d1117;border:1px solid rgba(245,158,11,0.3);border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 40px rgba(245,158,11,0.15);">
-    <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
-      <div>
-        <div style="font-size:14px;font-weight:700;color:var(--accent3);">⚡ Défi Éclair</div>
-        <div id="fc-challenge-info" style="font-size:11px;color:var(--muted);">Question 1/10 · Temps: 60s</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div id="fc-challenge-score" style="font-size:13px;font-weight:700;color:var(--accent);background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);border-radius:20px;padding:4px 12px;">0 pts</div>
-        <div id="fc-challenge-timer" style="font-size:18px;font-weight:900;font-family:monospace;color:var(--accent3);">60</div>
-        <button onclick="closeFlashChallenge()" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--muted);width:28px;height:28px;cursor:pointer;font-size:14px;">✕</button>
-      </div>
-    </div>
-    <div style="height:3px;background:var(--surface2);"><div id="fc-challenge-prog" style="height:100%;background:linear-gradient(90deg,#f59e0b,#ef4444);transition:width 0.3s;width:100%;"></div></div>
-    <div style="flex:1;overflow-y:auto;padding:18px;" id="fc-challenge-body"></div>
-    <div style="padding:12px 18px;border-top:1px solid var(--border);">
-      <button id="fc-challenge-next" onclick="challengeNext()" disabled style="width:100%;padding:11px;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;border-radius:10px;color:#fff;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;opacity:0.4;">Question suivante →</button>
-    </div>
-  </div>
-</div>
-
-<!-- Floating Dictionary Modal -->
-<div id="dictModal" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:3000;background:var(--surface);border:1px solid rgba(34,211,238,0.3);border-radius:14px;padding:14px 18px;min-width:280px;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-    <div style="font-size:11px;font-weight:700;color:var(--accent2);">📚 Dictionnaire scientifique</div>
-    <button onclick="document.getElementById('dictModal').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;">✕</button>
-  </div>
-  <div id="dict-word" style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;"></div>
-  <div id="dict-result" style="font-size:12px;color:var(--muted);line-height:1.8;">⏳ Traduction en cours...</div>
-</div>
-
 <!-- PDF VIEWER MODAL -->
 <div class="vmodal" id="pdfModal" style="z-index:1001;">
   <div class="vmodal-box" style="max-width:860px;max-height:90vh;display:flex;flex-direction:column;">
@@ -2370,7 +2145,7 @@ let subjectIcon = '📚';
 let isLoading = false;
 let conversationHistory = [];
 // اللغة الافتراضية: الفرنسية — يمكن للطالب التغيير للعربية
-let lang = (localStorage.getItem('msaed_lang') === 'ar') ? 'ar' : 'fr';
+let lang = localStorage.getItem('msaed_lang') || 'fr';
 
 // ── المستوى الدراسي (يُحدَّث من القائمة المنسدلة) ──
 let studyLevel = localStorage.getItem('msaed_study_level') || 'ثانية باك';
@@ -2386,7 +2161,7 @@ const i18n = {
     welcomeTitle: 'مرحباً بك في مساعد الطلاب المغاربة!',
     welcomeDesc: 'أنا هنا لمساعدتك في جميع مواد <strong>الثانوي الإعدادي والتأهيلي والباكالوريا</strong><br>اختر المادة من القائمة واسألني أي سؤال 📖',
     levelBar: '📚 كل المواد — مساعدة شاملة',
-    placeholder: 'Écris ta question ici... Ex: Explique-moi la dérivée',
+    placeholder: 'اكتب سؤالك هنا... مثال: اشرح لي المعادلة التفاضلية',
     subjectChanged: (s) => `✅ تم اختيار مادة **${s}** — أنا جاهز لمساعدتك! اسألني أي سؤال. 🎓`,
     errConn: '⚠️ حدث خطأ في الاتصال. حاول مجدداً.',
     errNet: '⚠️ تعذّر الاتصال. تحقق من اتصالك بالإنترنت.',
@@ -2510,47 +2285,34 @@ function renderUI() {
   const t = i18n[lang];
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-
-  // Helper sécurisé — ne plante jamais si l'élément est absent
-  const _set = (id, val, prop = 'textContent') => {
-    const el = document.getElementById(id);
-    if (el) el[prop] = val;
-  };
-
-  _set('headerTitle',  t.headerTitle);
-  _set('headerSub',    t.headerSub);
-  _set('statusTxt',    t.statusTxt);
-  _set('langBtn',      t.langBtn);
-  _set('levelBar',     t.levelBar);
-  _set('welcomeTitle', t.welcomeTitle);
-  _set('welcomeDesc',  t.welcomeDesc, 'innerHTML');
-  _set('userInput',    t.placeholder, 'placeholder');
-
-  // Quick buttons
+  document.getElementById('headerTitle').textContent = t.headerTitle;
+  document.getElementById('headerSub').textContent = t.headerSub;
+  document.getElementById('statusTxt').textContent = t.statusTxt;
+  document.getElementById('langBtn').textContent = t.langBtn;
+  document.getElementById('levelBar').textContent = t.levelBar;
+  document.getElementById('welcomeTitle').textContent = t.welcomeTitle;
+  document.getElementById('welcomeDesc').innerHTML = t.welcomeDesc;
+  document.getElementById('userInput').placeholder = t.placeholder;
+  // Quick buttons — use data attributes to avoid quote issues
   const qa = document.getElementById('quickActions');
-  if (qa) {
-    qa.innerHTML = '';
-    t.quickBtns.forEach(b => {
-      const btn = document.createElement('button');
-      btn.className = 'quick-btn';
-      btn.textContent = b.label;
-      btn.addEventListener('click', () => sendQuick(b.cmd));
-      qa.appendChild(btn);
-    });
-  }
-
+  qa.innerHTML = '';
+  t.quickBtns.forEach(b => {
+    const btn = document.createElement('button');
+    btn.className = 'quick-btn';
+    btn.textContent = b.label;
+    btn.addEventListener('click', () => sendQuick(b.cmd));
+    qa.appendChild(btn);
+  });
   // Hint chips
   const hc = document.getElementById('hintChips');
-  if (hc) {
-    hc.innerHTML = '';
-    t.hints.forEach((h, i) => {
-      const chip = document.createElement('span');
-      chip.className = 'hint-chip';
-      chip.textContent = h;
-      chip.addEventListener('click', () => sendQuick(t.hintCmds[i]));
-      hc.appendChild(chip);
-    });
-  }
+  hc.innerHTML = '';
+  t.hints.forEach((h, i) => {
+    const chip = document.createElement('span');
+    chip.className = 'hint-chip';
+    chip.textContent = h;
+    chip.addEventListener('click', () => sendQuick(t.hintCmds[i]));
+    hc.appendChild(chip);
+  });
 }
 
 function toggleLang() {
@@ -2570,13 +2332,13 @@ function setSubject(btn, subject, desc, icon) {
   subjectDesc = desc;
   subjectIcon = icon;
   conversationHistory = [];
-  const _lbEl = document.getElementById('levelBar'); if(_lbEl) _lbEl.textContent = icon + ' ' + subject + ' — ' + studyLevel;
+  document.getElementById('levelBar').textContent = icon + ' ' + subject + ' — ' + studyLevel;
   addBotMessage(i18n[lang].subjectChanged(subject));
 }
 
 function handleKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
 function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 90) + 'px'; }
-function sendQuick(text) { const ui=document.getElementById('userInput'); if(ui){ui.value=text; sendMessage();} }
+function sendQuick(text) { document.getElementById('userInput').value = text; sendMessage(); }
 
 function addUserMessage(text) {
   const msgs = document.getElementById('messages');
@@ -2629,7 +2391,6 @@ function addBotMessage(text) {
 
 function addTyping() {
   const msgs = document.getElementById('messages');
-  if (!msgs) return null;
   const d = document.createElement('div');
   d.className = 'msg bot';
   d.id = 'typing';
@@ -2648,7 +2409,7 @@ function addTyping() {
 }
 
 function removeTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
-function scrollDown() { const m = document.getElementById('messages'); if(m) setTimeout(() => m.scrollTop = m.scrollHeight, 50); }
+function scrollDown() { const m = document.getElementById('messages'); setTimeout(() => m.scrollTop = m.scrollHeight, 50); }
 function escHtml(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 // ══════════════════════════════════════════════════════════════════
 //  MATH RENDERING — نظام معالجة المعادلات الرياضية
@@ -3096,7 +2857,7 @@ document.getElementById('vmodal').addEventListener('click', function(e) {
 });
 
 function switchTab(tab) {
-  ['chat','videos','exp','exam','bac','national','analytics','group','favorites','scanner','langues','challenge','countdown','methodo','orientation'].forEach(t => {
+  ['chat','videos','exp','exam','bac','national','analytics','group','favorites','scanner','langues'].forEach(t => {
     const tb = document.getElementById(`tab-${t}`);
     const pn = document.getElementById(`panel-${t}`);
     if (tb) tb.classList.toggle('active', t === tab);
@@ -3111,10 +2872,6 @@ function switchTab(tab) {
   if (tab === 'favorites') { buildFavorites(); buildOfflineBank(); }
   if (tab === 'scanner') initScanner();
   if (tab === 'langues') initLanguesTab();
-  if (tab === 'challenge') initChallengeTab();
-  if (tab === 'countdown') initCountdownTab();
-  if (tab === 'methodo') initMethodoTab();
-  if (tab === 'orientation') initOrientationTab();
 }
 
 // ══════════════════════════════════════════
@@ -3376,7 +3133,7 @@ window.addEventListener("DOMContentLoaded", function initPWA() {
   };
   const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
-  const _mEl = document.getElementById('pwa-manifest'); if(_mEl) _mEl.href = url;
+  document.getElementById('pwa-manifest').href = url;
 
 
   // ── Service Worker: يعمل فقط من http:// أو https:// ──
@@ -6242,7 +5999,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const dot = document.getElementById('fbLoadDot');
   const txt = document.getElementById('fbLoadTxt');
   if (dot) dot.style.background = 'var(--accent)';
-  if (txt) txt.textContent = '✅ Prêt — connectez-vous';
+  if (txt) txt.textContent = '✅ جاهز — سجّل دخولك';
 
   // ── كشف بيئة التشغيل ──
   const proto = location.protocol;
@@ -6331,462 +6088,577 @@ function clearApiKeys() {
 }
 
 
-function toggleToolsMenu() {
-  const m = document.getElementById('toolsMenu');
-  if (!m) return;
-  const isOpen = m.style.display !== 'none';
-  if (isOpen) {
-    m.style.display = 'none';
-  } else {
-    m.style.display = 'block';
-    m.style.zIndex = '9999';
-    // Fermer quand on clique ailleurs — délai pour éviter la fermeture immédiate
-    setTimeout(() => {
-      function closeMenu(e) {
-        const btn = document.getElementById('toolsMenuBtn');
-        const menu = document.getElementById('toolsMenu');
-        if (!menu) { document.removeEventListener('click', closeMenu); return; }
-        if (btn && btn.contains(e.target)) return; // clic sur le bouton lui-même
-        if (menu.contains(e.target)) return; // clic dans le menu
-        menu.style.display = 'none';
-        document.removeEventListener('click', closeMenu);
-      }
-      document.addEventListener('click', closeMenu);
-    }, 150);
-  }
-}
-
 // ملاحظة: renderUI و updateStorageBadge تُستدعيان في DOMContentLoaded أعلاه
 
-// ════════════════════════════════════════════════════════════════
-//  FEATURE: GLOBAL FUZZY SEARCH
-// ════════════════════════════════════════════════════════════════
-const SEARCH_INDEX = [];
+// ══════════════════════════════════════════════════════════════════
+//  MODULE — APPRENTISSAGE DES LANGUES
+//  Quiz interactif + Firebase save + ressources vidéo
+// ══════════════════════════════════════════════════════════════════
 
-function buildSearchIndex() {
-  // Exams
-  if (typeof NATIONAL_EXAMS !== 'undefined') {
-    NATIONAL_EXAMS.forEach(e => SEARCH_INDEX.push({ type:'exam', icon:'📄', label: e.title, sub: e.subject + ' · ' + e.year, action: () => { switchTab('national'); setTimeout(() => toggleNatExam(e.id), 300); } }));
+// ── Base de données Quiz ──
+const LANG_QUIZ = {
+  fr: {
+    flag: '🇫🇷', name: 'Quiz Français', color: '#a78bfa',
+    questions: [
+      { q: "Quel est le COD dans : 'Marie lit un roman passionnant' ?", opts: ['Marie','lit','un roman passionnant','passionnant'], ans: 2, exp: "Le COD répond à la question 'quoi ?' après le verbe — ici 'un roman passionnant'." },
+      { q: "Choisissez la bonne forme du subjonctif : 'Il faut que tu ___ à l'heure.'", opts: ['arrives','arrive','arriver','es arrivé'], ans: 1, exp: "Après 'il faut que', on utilise le subjonctif présent → 'arrive'." },
+      { q: "Quelle figure de style est utilisée : 'La vie est un long fleuve tranquille' ?", opts: ['Métaphore','Comparaison','Hyperbole','Personnification'], ans: 0, exp: "La métaphore assimile directement deux éléments sans outil comparatif." },
+      { q: "Quel temps verbal convient : 'Quand je serai grand, je ___ médecin.'", opts: ['serai','suis','serais','étais'], ans: 0, exp: "Dans une proposition temporelle avec 'quand' + futur, la principale est aussi au futur simple." },
+      { q: "Comment appelle-t-on la thèse soutenue dans un texte argumentatif ?", opts: ['Argument','Conclusion','Thèse','Antithèse'], ans: 2, exp: "La thèse est l'idée principale défendue par l'auteur." },
+      { q: "Dans 'Il pleut des cordes', quelle est la figure de style ?", opts: ['Litote','Hyperbole','Métonymie','Euphémisme'], ans: 1, exp: "L'hyperbole exagère une réalité pour créer un effet expressif." },
+      { q: "Accordez le participe passé : 'Les livres que j'ai ___ (lire).'", opts: ['lu','lus','lues','lire'], ans: 1, exp: "Le participe passé avec 'avoir' s'accorde avec le COD placé AVANT → 'les livres' (masc. plur.) → 'lus'." },
+      { q: "Quel est le registre littéraire d'une tragédie de Racine ?", opts: ['Comique','Épique','Tragique','Lyrique'], ans: 2, exp: "Racine est le maître du registre tragique au XVIIe siècle (Phèdre, Andromaque)." },
+      { q: "Pour la méthodologie BAC : combien de parties minimum dans un commentaire composé ?", opts: ['1','2','3','4'], ans: 1, exp: "Un commentaire composé comporte généralement 2 ou 3 parties (au minimum 2 au BAC)." },
+      { q: "Que signifie 'l'implicite' dans un texte ?", opts: ['Ce qui est dit clairement','Ce qui est sous-entendu','La conclusion','Le thème principal'], ans: 1, exp: "L'implicite désigne ce qui n'est pas dit explicitement mais peut être déduit du contexte." },
+    ]
+  },
+  en: {
+    flag: '🇬🇧', name: 'English Quiz', color: '#22d3ee',
+    questions: [
+      { q: "Choose the correct tense: 'By 2030, scientists ___ a cure for cancer.'", opts: ['will find','will have found','found','have found'], ans: 1, exp: "Future Perfect is used for actions completed before a specific future time." },
+      { q: "Which word is a SYNONYM of 'meticulous' ?", opts: ['Careless','Precise','Quick','Vague'], ans: 1, exp: "'Meticulous' means showing great attention to detail — synonym: precise, thorough." },
+      { q: "Identify the correct passive voice: 'They built the bridge in 1990.'", opts: ['The bridge was built in 1990.','The bridge is built in 1990.','The bridge were built in 1990.','The bridge built in 1990.'], ans: 0, exp: "Passive = was/were + past participle. Past simple passive: was/were + V3." },
+      { q: "What is the meaning of 'nevertheless' ?", opts: ['Therefore','However','Moreover','Besides'], ans: 1, exp: "'Nevertheless' means 'despite that' — it introduces a contrast, like 'however'." },
+      { q: "Technical English: What does 'bandwidth' refer to ?", opts: ['Physical width of a cable','Data transfer rate capacity','Number of users on a network','Computer memory'], ans: 1, exp: "Bandwidth = the maximum rate of data transfer across a given path." },
+      { q: "Complete the conditional: 'If I ___ harder, I would have passed.'", opts: ['studied','had studied','study','would study'], ans: 1, exp: "3rd conditional (past hypothetical): If + had + V3, would have + V3." },
+      { q: "Which sentence contains a GERUND ?", opts: ['She is running fast.','Running is good for health.','She runs every morning.','She ran yesterday.'], ans: 1, exp: "A gerund is a verb ending in -ing used as a noun. Here 'Running' is the subject." },
+      { q: "Choose the correct article: '___ Eiffel Tower is in Paris.'", opts: ['A','An','The','—'], ans: 2, exp: "We use 'The' with unique landmarks and specific nouns known to both speaker and listener." },
+      { q: "What is 'irony' in literature ?", opts: ['Exaggeration for effect','Saying the opposite of what you mean','Comparing two unlike things','Giving human traits to objects'], ans: 1, exp: "Irony = saying the opposite of what you literally mean, often for humorous or critical effect." },
+      { q: "Which linking word expresses CAUSE ?", opts: ['Although','Despite','Because','Nevertheless'], ans: 2, exp: "'Because' introduces a reason/cause clause. Contrast: although, despite → concession." },
+    ]
+  },
+  de: {
+    flag: '🇩🇪', name: 'Deutsch Quiz', color: '#f472b6',
+    questions: [
+      { q: "Welcher Artikel ist korrekt? '___ Buch liegt auf dem Tisch.'", opts: ['Der','Die','Das','Ein'], ans: 2, exp: "'Buch' (Buch = book) ist sächlich (neuter) → bestimmter Artikel: 'Das'." },
+      { q: "Wie sagt man 'I am hungry' auf Deutsch?", opts: ['Ich bin hungrig.','Ich habe Hunger.','Mir ist hungrig.','Ich esse Hunger.'], ans: 1, exp: "Im Deutschen sagt man 'Ich habe Hunger' (I have hunger), nicht 'Ich bin hungrig' (obwohl beide möglich)." },
+      { q: "Konjugieren Sie: 'Er ___ jeden Tag Deutsch.' (lernen)", opts: ['lernst','lernt','lerne','lernen'], ans: 1, exp: "3. Person Singular Präsens: er/sie/es + Stamm + t → er lernt." },
+      { q: "Was bedeutet 'Fernweh' ?", opts: ['Fear of flying','Longing for distant places','Homesickness','Love of nature'], ans: 1, exp: "'Fernweh' ist ein deutsches Wort für die Sehnsucht nach fernen Ländern und Reisen." },
+      { q: "Welche Präposition verlangt den Dativ? '___ dem Haus'", opts: ['für','durch','in','ohne'], ans: 2, exp: "'in' kann Akkusativ (Bewegung) oder Dativ (Ort) nehmen. 'in dem' → im Haus (Ort = Dativ)." },
+      { q: "Bilden Sie das Plural: 'das Kind' →", opts: ['die Kinder','die Kinds','die Kinde','die Kindern'], ans: 0, exp: "Plural von 'das Kind' (child) → 'die Kinder'. Unregelmäßiger Plural mit -er Endung." },
+      { q: "Was ist das Gegenteil von 'schnell' ?", opts: ['groß','langsam','laut','kalt'], ans: 1, exp: "'schnell' = fast (rapide). Antonym: 'langsam' = slow (lent)." },
+      { q: "Welches Verb ist trennbar? 'Er ___ das Licht ___.'", opts: ['macht...aus','hat...aus','ist...aus','wird...aus'], ans: 0, exp: "'Ausmachen' ist ein trennbares Verb → 'Er macht das Licht aus' (He turns off the light)." },
+      { q: "Übersetzen Sie: 'Je m'appelle Ahmed'", opts: ['Ich heiße Ahmed.','Ich bin Ahmed.','Mein Name ist Ahmed.','Ich rufe Ahmed.'], ans: 0, exp: "'Je m'appelle' = 'Ich heiße' (My name is). 'Ich bin Ahmed' ist auch korrekt aber weniger üblich." },
+      { q: "Welche Zahl ist 'vierundzwanzig' ?", opts: ['14','24','42','40'], ans: 1, exp: "'vier' = 4, 'und' = and, 'zwanzig' = 20 → 4 + 20 = 24 (vierundzwanzig)." },
+    ]
   }
-  // BAC questions
-  if (typeof BAC_QUESTIONS !== 'undefined') {
-    BAC_QUESTIONS.forEach((q,i) => SEARCH_INDEX.push({ type:'bac', icon:'📋', label: q.q.slice(0,60)+'...', sub: q.subject + ' · ' + q.year, action: () => switchTab('bac') }));
-  }
-  // Subjects
-  ['Mathématiques','Physique-Chimie','SVT','Philosophie','Histoire-Géo','Français'].forEach(s =>
-    SEARCH_INDEX.push({ type:'subject', icon:'📚', label: s, sub: 'Matière', action: () => setSubject(document.querySelector('.subject-btn'), s, s, '📚') })
-  );
+};
+
+// ── Ressources vidéo ──
+const LANG_VIDEOS = {
+  fr: [
+    { title: 'Méthodologie BAC Français — Commentaire composé', ch: 'Darija Academy', id: 'dQw4w9WgXcQ', thumb: 'https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg', views: '120K' },
+    { title: 'Les figures de style — Cours complet BAC', ch: 'Prof Maroc', id: '9bZkp7q19f0', thumb: 'https://img.youtube.com/vi/9bZkp7q19f0/mqdefault.jpg', views: '85K' },
+    { title: 'Grammaire française — Subjonctif et temps verbaux', ch: 'TutoDarija', id: 'kJQP7kiw5Fk', thumb: 'https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg', views: '200K' },
+    { title: 'Rédaction et dissertation — Méthode BAC Maroc', ch: 'Enseignement Maroc', id: 'RgKAFK5djSk', thumb: 'https://img.youtube.com/vi/RgKAFK5djSk/mqdefault.jpg', views: '95K' },
+  ],
+  en: [
+    { title: 'English Grammar — Tenses for BAC Students', ch: 'English Maroc', id: 'JGwWNGJdvx8', thumb: 'https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg', views: '310K' },
+    { title: 'Reading Comprehension — BAC English Techniques', ch: 'Prof English MA', id: 'OPf0YbXqDm0', thumb: 'https://img.youtube.com/vi/OPf0YbXqDm0/mqdefault.jpg', views: '150K' },
+    { title: 'Technical English Vocabulary — Sciences & Tech', ch: 'Darija English', id: 'M7lc1UVf-VE', thumb: 'https://img.youtube.com/vi/M7lc1UVf-VE/mqdefault.jpg', views: '78K' },
+    { title: 'Essay Writing Tips — Moroccan BAC Format', ch: 'BAC English MA', id: 'fJ9rUzIMcZQ', thumb: 'https://img.youtube.com/vi/fJ9rUzIMcZQ/mqdefault.jpg', views: '62K' },
+  ],
+  de: [
+    { title: 'Deutsch für Anfänger — Leçon 1 complète', ch: 'Deutsch Maroc', id: 'bx1tMiMjzd4', thumb: 'https://img.youtube.com/vi/bx1tMiMjzd4/mqdefault.jpg', views: '45K' },
+    { title: 'Allemand BAC Maroc — Grammaire de base', ch: 'Prof Allemand MA', id: 'YQHsXMglC9A', thumb: 'https://img.youtube.com/vi/YQHsXMglC9A/mqdefault.jpg', views: '28K' },
+    { title: 'Vocabulaire allemand essentiel A1–B1', ch: 'Langue Allemande', id: 'GtL1huin9EE', thumb: 'https://img.youtube.com/vi/GtL1huin9EE/mqdefault.jpg', views: '33K' },
+    { title: 'Conjugaison allemande — Présent et Passé', ch: 'Darija Deutsch', id: 'ysz5S6PUM-U', thumb: 'https://img.youtube.com/vi/ysz5S6PUM-U/mqdefault.jpg', views: '19K' },
+  ]
+};
+
+// ── État du quiz ──
+let _quizState = { lang: 'fr', idx: 0, score: 0, answered: false, questions: [] };
+let _langTabInitialized = false;
+
+// ── Initialiser l'onglet Langues ──
+function initLanguesTab() {
+  if (_langTabInitialized) { _refreshLangStats(); return; }
+  _langTabInitialized = true;
+  showLangVideos('fr');
+  _refreshLangStats();
 }
 
-function toggleGlobalSearch() {
-  const w = document.getElementById('globalSearchWrap');
-  const inp = document.getElementById('globalSearchInp');
-  if (!w) return;
-  const visible = w.style.display !== 'none';
-  w.style.display = visible ? 'none' : 'block';
-  if (!visible) { inp.focus(); if (!SEARCH_INDEX.length) buildSearchIndex(); }
-  else { inp.value = ''; hideSearchResults(); }
-}
+// ── Afficher les vidéos d'une langue ──
+function showLangVideos(lang) {
+  // Activer l'onglet
+  ['fr','en','de'].forEach(l => {
+    const t = document.getElementById(`vtab-${l}`);
+    if (t) t.classList.toggle('active', l === lang);
+  });
 
-function globalSearch(q) {
-  const res = document.getElementById('searchResults');
-  if (!q.trim()) { res.style.display = 'none'; return; }
-  q = q.toLowerCase();
-  const matches = SEARCH_INDEX.filter(item =>
-    item.label.toLowerCase().includes(q) || item.sub.toLowerCase().includes(q)
-  ).slice(0, 8);
-  if (!matches.length) { res.style.display = 'none'; return; }
-  res.innerHTML = matches.map((m, i) =>
-    `<div class="search-result-item" onclick="window._srActions[${i}]()">
-      <span style="font-size:16px;">${m.icon}</span>
-      <div><div style="font-size:12px;font-weight:600;">${m.label}</div><div style="font-size:10px;color:var(--muted);">${m.sub}</div></div>
-    </div>`).join('');
-  window._srActions = matches.map(m => () => { m.action(); toggleGlobalSearch(); });
-  res.style.display = 'block';
-}
-function hideSearchResults() { const r = document.getElementById('searchResults'); if (r) r.style.display = 'none'; }
+  const grid = document.getElementById('lang-videos-grid');
+  if (!grid) return;
+  const videos = LANG_VIDEOS[lang] || [];
 
-// ════════════════════════════════════════════════════════════════
-//  FEATURE: CHALLENGE & LEADERBOARD
-// ════════════════════════════════════════════════════════════════
-let _challengeState = { questions:[], idx:0, score:0, timer:null, seconds:60 };
-
-async function startFlashChallenge() {
-  const subject = document.getElementById('challenge-subject-sel')?.value || 'Mathématiques';
-  const modal = document.getElementById('flashChallengeModal');
-  if (!modal) return;
-  modal.style.display = 'flex';
-  document.getElementById('fc-challenge-body').innerHTML = `<div style="text-align:center;padding:30px;color:var(--muted);">⏳ Génération des questions (Gemini)...</div>`;
-
-  const prompt = `Crée 10 questions QCM de niveau BAC Maroc en ${subject}. JSON uniquement:
-{"questions":[{"q":"Question","opts":["A","B","C","D"],"ans":0}]}
-Questions courtes, variées, toutes en FRANÇAIS.`;
-  try {
-    const raw = await _callAPI('gemini', MODELS.gemini.fast, [
-      {role:'system',content:'JSON uniquement sans markdown'},
-      {role:'user',content:prompt}
-    ], 1000, 0.4);
-    const parsed = JSON.parse(raw.replace(/```json|```/g,'').trim());
-    _challengeState = { questions: parsed.questions||[], idx:0, score:0, timer:null, seconds:60 };
-    _renderChallengeQ();
-    _startChallengeTimer();
-  } catch(e) {
-    document.getElementById('fc-challenge-body').innerHTML = `<div style="text-align:center;color:var(--danger);padding:20px;">⚠️ Erreur — réessayez</div>`;
-  }
-}
-
-function _renderChallengeQ() {
-  const { questions, idx } = _challengeState;
-  if (idx >= questions.length) { _endChallenge(); return; }
-  const q = questions[idx];
-  const letters = ['A','B','C','D'];
-  document.getElementById('fc-challenge-info').textContent = `Question ${idx+1}/${questions.length}`;
-  document.getElementById('fc-challenge-prog').style.width = `${((questions.length-idx)/questions.length)*100}%`;
-  document.getElementById('fc-challenge-next').disabled = true;
-  document.getElementById('fc-challenge-next').style.opacity = '0.4';
-  document.getElementById('fc-challenge-body').innerHTML = `
-    <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:16px;line-height:1.6;">${q.q}</div>
-    ${q.opts.map((opt,i) => `
-      <button class="challenge-opt" id="copt-${i}" onclick="selectChallengeAns(${i})">
-        <span style="width:22px;height:22px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">${letters[i]}</span>
-        <span>${opt}</span>
-      </button>`).join('')}`;
-}
-
-function selectChallengeAns(chosen) {
-  const { questions, idx } = _challengeState;
-  const q = questions[idx];
-  for (let i=0;i<4;i++) {
-    const b = document.getElementById(`copt-${i}`);
-    if (!b) continue;
-    b.disabled = true;
-    if (i===q.ans) b.classList.add('correct');
-    else if (i===chosen && i!==q.ans) b.classList.add('wrong');
-  }
-  if (chosen===q.ans) {
-    _challengeState.score += 10;
-    document.getElementById('fc-challenge-score').textContent = _challengeState.score + ' pts';
-    showToast('✅ +10 points !');
-  }
-  const nb = document.getElementById('fc-challenge-next');
-  nb.disabled = false; nb.style.opacity = '1';
-  if (idx+1 >= _challengeState.questions.length) nb.textContent = '🏆 Voir résultats';
-}
-
-function challengeNext() {
-  _challengeState.idx++;
-  if (_challengeState.idx >= _challengeState.questions.length) { _endChallenge(); return; }
-  _renderChallengeQ();
-}
-
-function _startChallengeTimer() {
-  _challengeState.seconds = 60 * (_challengeState.questions.length / 10);
-  clearInterval(_challengeState.timer);
-  _challengeState.timer = setInterval(() => {
-    _challengeState.seconds--;
-    const el = document.getElementById('fc-challenge-timer');
-    if (el) { el.textContent = Math.max(0,Math.round(_challengeState.seconds)); el.style.color = _challengeState.seconds < 10 ? 'var(--danger)' : 'var(--accent3)'; }
-    if (_challengeState.seconds <= 0) _endChallenge();
-  }, 1000);
-}
-
-function _endChallenge() {
-  clearInterval(_challengeState.timer);
-  const { score, questions } = _challengeState;
-  const pct = Math.round(score / (questions.length*10) * 100);
-  document.getElementById('fc-challenge-body').innerHTML = `
-    <div style="text-align:center;padding:20px;">
-      <div style="font-size:52px;">${pct>=80?'🏆':pct>=50?'⭐':'💪'}</div>
-      <div style="font-size:32px;font-weight:900;color:var(--accent3);margin:8px 0;">${score} pts</div>
-      <div style="font-size:14px;color:var(--muted);">${pct}% de réussite</div>
-      <button onclick="closeFlashChallenge()" style="margin-top:16px;padding:9px 24px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;">✓ Fermer</button>
-    </div>`;
-  document.getElementById('fc-challenge-next').style.display = 'none';
-  // Save to leaderboard
-  _saveLeaderboardScore(score);
-}
-
-function closeFlashChallenge() {
-  clearInterval(_challengeState.timer);
-  document.getElementById('flashChallengeModal').style.display = 'none';
-  document.getElementById('fc-challenge-next').style.display = '';
-  document.getElementById('fc-challenge-next').textContent = 'Question suivante →';
-}
-
-function _saveLeaderboardScore(pts) {
-  const existing = JSON.parse(localStorage.getItem('lb_scores') || '[]');
-  const name = currentUser?.displayName || 'Anonyme';
-  existing.push({ name, pts, date: new Date().toLocaleDateString('fr-FR') });
-  existing.sort((a,b)=>b.pts-a.pts);
-  localStorage.setItem('lb_scores', JSON.stringify(existing.slice(0,50)));
-  const myPts = JSON.parse(localStorage.getItem('lb_my_pts') || '0') + pts;
-  localStorage.setItem('lb_my_pts', myPts);
-  // Update UI
-  const el = document.getElementById('challenge-my-pts');
-  if (el) el.textContent = myPts;
-  _buildLeaderboard();
-}
-
-function _buildLeaderboard() {
-  const scores = JSON.parse(localStorage.getItem('lb_scores') || '[]');
-  const el = document.getElementById('leaderboard-list');
-  if (!el) return;
-  if (!scores.length) { el.innerHTML = '<div style="text-align:center;color:var(--muted);padding:20px;font-size:12px;">Soyez le premier à figurer dans le classement !</div>'; return; }
-  const medals = ['🥇','🥈','🥉'];
-  el.innerHTML = scores.slice(0,10).map((s,i) => `
-    <div class="lb-row">
-      <div class="lb-rank" style="background:${i<3?'rgba(245,158,11,0.15)':'rgba(255,255,255,0.04)'};color:${i<3?'#f59e0b':'var(--muted)'};">${medals[i]||i+1}</div>
-      <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:var(--text);">${s.name}</div><div style="font-size:10px;color:var(--muted);">${s.date}</div></div>
-      <div style="font-size:14px;font-weight:700;color:var(--accent3);">${s.pts} pts</div>
-    </div>`).join('');
-}
-
-function initChallengeTab() {
-  const myPts = parseInt(localStorage.getItem('lb_my_pts') || '0');
-  const el = document.getElementById('challenge-my-pts');
-  if (el) el.textContent = myPts;
-  _buildLeaderboard();
-}
-
-// ════════════════════════════════════════════════════════════════
-//  FEATURE: COUNTDOWN + POMODORO + AI DAILY PLAN
-// ════════════════════════════════════════════════════════════════
-let _pomodoroTimer = null;
-let _pomodoroSeconds = 25*60;
-let _pomodoroIsWork = true;
-let _pomodoroRunning = false;
-
-function initCountdownTab() {
-  const saved = localStorage.getItem('bac_date');
-  if (saved) {
-    document.getElementById('bac-date-input').value = saved;
-    updateCountdown(saved);
-    document.getElementById('plan-btn').style.display = 'block';
-  }
-}
-
-function saveBacDate() {
-  const d = document.getElementById('bac-date-input').value;
-  if (!d) return;
-  localStorage.setItem('bac_date', d);
-  updateCountdown(d);
-  document.getElementById('plan-btn').style.display = 'block';
-  showToast('✅ Date enregistrée !');
-}
-
-function updateCountdown(dateStr) {
-  const target = new Date(dateStr);
-  const now = new Date();
-  const days = Math.max(0, Math.ceil((target - now) / 86400000));
-  const el = document.getElementById('days-left');
-  if (el) el.textContent = days;
-  // Progress bar (assuming 365 day prep)
-  const prog = document.getElementById('bac-progress-bar');
-  if (prog) prog.style.width = Math.min(100, Math.round((1 - days/365)*100)) + '%';
-}
-
-async function generateDailyPlan() {
-  const days = parseInt(document.getElementById('days-left').textContent) || 30;
-  const area = document.getElementById('daily-plan-area');
-  area.innerHTML = '<div style="color:var(--muted);font-size:12px;">⏳ Génération du plan (Gemini)...</div>';
-  const prompt = `Il reste ${days} jours avant le BAC marocain. Génère un plan de révision PERSONNALISÉ pour aujourd'hui en 3-4 points concis. Format: points courts avec emoji, en français, adapté à ${days} jours restants.`;
-  try {
-    const plan = await _callAPI('gemini', MODELS.gemini.fast,
-      [{role:'user',content:prompt}], 400, 0.5);
-    area.innerHTML = `<div style="font-size:12.5px;line-height:1.9;color:var(--text);">${formatText(plan)}</div>`;
-  } catch(e) {
-    area.innerHTML = `<div style="color:var(--muted);font-size:12px;">⚠️ Erreur — réessayez</div>`;
-  }
-}
-
-function pomodoroToggle() {
-  if (_pomodoroRunning) {
-    clearInterval(_pomodoroTimer);
-    _pomodoroRunning = false;
-    document.getElementById('pomo-btn').textContent = '▶ Reprendre';
-  } else {
-    _pomodoroRunning = true;
-    document.getElementById('pomo-btn').textContent = '⏸ Pause';
-    _pomodoroTimer = setInterval(() => {
-      _pomodoroSeconds--;
-      _updatePomodoroDisplay();
-      if (_pomodoroSeconds <= 0) {
-        clearInterval(_pomodoroTimer);
-        _pomodoroRunning = false;
-        _pomodoroIsWork = !_pomodoroIsWork;
-        _pomodoroSeconds = _pomodoroIsWork ? 25*60 : 5*60;
-        const lbl = document.getElementById('pomodoro-label');
-        const disp = document.getElementById('pomodoro-display');
-        if (_pomodoroIsWork) {
-          if (lbl) lbl.textContent = '⏱️ Session de travail';
-          if (disp) disp.classList.remove('break-mode');
-          showToast('💪 Pause terminée — Au travail !');
-        } else {
-          if (lbl) lbl.textContent = '☕ Pause — Reposez-vous';
-          if (disp) disp.classList.add('break-mode');
-          showToast('🍅 Bravo ! Prenez une pause de 5 minutes');
-        }
-        _updatePomodoroDisplay();
-        document.getElementById('pomo-btn').textContent = '▶ Démarrer';
-      }
-    }, 1000);
-  }
-}
-
-function pomodoroReset() {
-  clearInterval(_pomodoroTimer);
-  _pomodoroRunning = false;
-  _pomodoroIsWork = true;
-  _pomodoroSeconds = 25*60;
-  _updatePomodoroDisplay();
-  document.getElementById('pomo-btn').textContent = '▶ Démarrer';
-  const lbl = document.getElementById('pomodoro-label');
-  if (lbl) lbl.textContent = '⏱️ Session de travail';
-  const disp = document.getElementById('pomodoro-display');
-  if (disp) disp.classList.remove('break-mode');
-}
-
-function _updatePomodoroDisplay() {
-  const m = Math.floor(_pomodoroSeconds/60).toString().padStart(2,'0');
-  const s = (_pomodoroSeconds%60).toString().padStart(2,'0');
-  const el = document.getElementById('pomodoro-display');
-  if (el) el.textContent = `${m}:${s}`;
-}
-
-// ════════════════════════════════════════════════════════════════
-//  FEATURE: MÉTHODOLOGIES
-// ════════════════════════════════════════════════════════════════
-const METHODO_DATA = [
-  { id:'philo', icon:'🤔', title:'Dissertation Philosophique', color:'#a78bfa', steps:[
-    { t:'1. Introduction', c:'Accroche percutante → Définition des termes du sujet → Problématisation → Annonce du plan (2 ou 3 parties)' },
-    { t:'2. Développement — Thèse', c:'Argument principal + exemple concret + citation de philosophe (Platon, Kant, Descartes…) → Transition vers la thèse opposée' },
-    { t:'3. Développement — Antithèse', c:'Réfutation nuancée de la thèse → Nouveau point de vue philosophique → Citation d\'un philosophe contradictoire' },
-    { t:'4. Synthèse / Dépassement', c:'Dépasser la contradiction → Position originale → Ouverture sur une question plus large' },
-    { t:'5. Conclusion', c:'Récapitulatif des étapes → Réponse claire à la problématique → Ouverture (question nouvelle)' },
-    { t:'⚠️ Erreurs fréquentes', c:'Ne pas répondre par oui/non sans nuance · Éviter le hors-sujet · Ne pas oublier les exemples concrets · Soigner les transitions' }
-  ]},
-  { id:'francais', icon:'✍️', title:'Commentaire Composé (Français)', color:'#22d3ee', steps:[
-    { t:'1. Lecture & Analyse', c:'Lire 2 fois · Identifier le genre (poème, roman, théâtre) · Repérer les figures de style · Définir le ton (lyrique, tragique, comique)' },
-    { t:'2. Introduction', c:'Situer l\'auteur et l\'œuvre → Présenter le texte (nature, sujet, mouvement littéraire) → Problématique → Plan annoncé' },
-    { t:'3. Axe 1 — Premier angle d\'analyse', c:'Idée directrice + 2-3 citations analysées (procédé → effet → interprétation) → Conclusion partielle' },
-    { t:'4. Axe 2 — Deuxième angle', c:'Même méthode : idée directrice + citations analysées → Lien logique entre les deux axes' },
-    { t:'5. Conclusion', c:'Bilan des deux axes → Réponse à la problématique → Ouverture (autre œuvre, autre époque)' },
-    { t:'💡 Figures de style clés', c:'Métaphore, comparaison, hyperbole, antithèse, chiasme, anaphore, allitération, oxymore' }
-  ]},
-  { id:'svt', icon:'🌱', title:'Méthode SVT — Analyse de Document', color:'#4ade80', steps:[
-    { t:'1. Lecture du sujet', c:'Identifier le type de document (courbe, schéma, tableau, électrophorèse) · Lire la légende · Repérer les axes (unités, valeurs)' },
-    { t:'2. Description objective', c:'Décrire CE QUE VOUS VOYEZ : valeurs précises, tendances (augmente/diminue), phases, points critiques. NE PAS interpréter encore.' },
-    { t:'3. Interprétation', c:'Expliquer le POURQUOI biologique : mécanismes, réactions, régulations. Utiliser le vocabulaire scientifique précis.' },
-    { t:'4. Conclusion', c:'Répondre directement à la question posée · Lier au cours (chapitre concerné) · Si demandé : schéma bilan' },
-    { t:'📐 Structure d\'une réponse type', c:'"Le document montre que… [description]. Cela s\'explique par… [interprétation]. Ainsi, on peut conclure que… [réponse à la question]."' },
-    { t:'⚠️ Erreurs fréquentes en SVT', c:'Décrire sans interpréter · Interpréter sans citer le document · Oublier les unités · Ne pas utiliser le vocabulaire du cours' }
-  ]},
-  { id:'math', icon:'🔢', title:'Méthode Mathématiques — Rédaction', color:'#f59e0b', steps:[
-    { t:'1. Lecture & Identification', c:'Identifier ce qui est demandé (calculer, démontrer, étudier…) · Lister les données · Choisir la méthode (dérivée, limites, intégrale…)' },
-    { t:'2. Rédaction brouillon', c:'Faire les calculs au brouillon d\'abord · Vérifier chaque étape · Encadrer le résultat final' },
-    { t:'3. Rédaction propre', c:'Justifier CHAQUE étape par un théorème ou une règle · Utiliser les notations correctes · Conclure avec "Donc…" ou "Ainsi…"' },
-    { t:'4. Étude de fonction', c:'1) Domaine · 2) Limites · 3) Dérivée & signe · 4) Tableau de variation · 5) Asymptotes · 6) Tracé' },
-    { t:'💡 Formules essentielles BAC', c:'$(u·v)\' = u\'v+uv\'$ · $(u/v)\' = (u\'v-uv\')/v²$ · $\\int u\'e^u = e^u$ · Limite: règle de l\'Hôpital · Suites: récurrence' }
-  ]},
-  { id:'histoire', icon:'🗺️', title:'Méthode Histoire — Dissertation', color:'#f472b6', steps:[
-    { t:'1. Analyse du sujet', c:'Identifier les mots-clés · Définir la période et l\'espace géographique · Formuler la problématique centrale' },
-    { t:'2. Mobilisation des connaissances', c:'Lister les événements, dates clés, acteurs, causes et conséquences liés au sujet · Organiser en 2-3 thèmes' },
-    { t:'3. Introduction', c:'Contexte historique → Définition des termes → Problématique → Plan annoncé' },
-    { t:'4. Développement', c:'Chaque partie : idée principale → arguments → exemples historiques précis (dates, noms, lieux) → conclusion partielle' },
-    { t:'5. Conclusion', c:'Synthèse des arguments → Réponse directe à la problématique → Ouverture sur les conséquences actuelles' }
-  ]}
-];
-
-function initMethodoTab() {
-  const container = document.getElementById('methodo-cards');
-  if (!container || container.children.length > 0) return;
-  _renderMethodoCards(METHODO_DATA);
-}
-
-function _renderMethodoCards(data) {
-  const container = document.getElementById('methodo-cards');
-  container.innerHTML = data.map(m => `
-    <div class="methodo-card" id="mc-${m.id}">
-      <div class="methodo-card-head" onclick="toggleMethodoCard('${m.id}')">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span style="font-size:20px;">${m.icon}</span>
-          <div>
-            <div style="font-size:13px;font-weight:700;color:var(--text);">${m.title}</div>
-            <div style="font-size:10px;color:${m.color};">${m.steps.length} étapes</div>
-          </div>
+  grid.innerHTML = videos.map(v => `
+    <div onclick="window.open('https://www.youtube.com/watch?v=${v.id}','_blank')"
+      style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all 0.2s;"
+      onmouseover="this.style.borderColor='rgba(34,211,238,0.4)';this.style.transform='translateY(-2px)'"
+      onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
+      <div style="position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;">
+        <img src="${v.thumb}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.style.background='#111'">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);">
+          <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;font-size:16px;">▶</div>
         </div>
-        <span style="color:var(--muted);transition:transform 0.2s;" id="mc-arrow-${m.id}">▼</span>
+        <div style="position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,0.75);color:#fff;font-size:9px;padding:2px 6px;border-radius:4px;">▶ ${v.views} vues</div>
       </div>
-      <div class="methodo-card-body" id="mc-body-${m.id}">
-        ${m.steps.map(s => `
-          <div class="methodo-step" style="border-right-color:${m.color}">
-            <strong style="color:${m.color};font-size:11px;">${s.t}</strong>
-            <div style="margin-top:4px;font-size:12px;color:var(--text);">${s.c}</div>
-          </div>`).join('')}
-        <button onclick="askAboutMethodo('${m.title}')" style="margin-top:10px;padding:7px 14px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);border-radius:7px;color:var(--accent);font-family:'Tajawal',sans-serif;font-size:11px;cursor:pointer;">💬 Demander à l'IA</button>
+      <div style="padding:10px 12px;">
+        <div style="font-size:12px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:4px;">${v.title}</div>
+        <div style="font-size:10px;color:var(--accent2);">📺 ${v.ch}</div>
       </div>
     </div>`).join('');
-  setTimeout(renderMath, 200);
 }
 
-function toggleMethodoCard(id) {
-  const body = document.getElementById(`mc-body-${id}`);
-  const arrow = document.getElementById(`mc-arrow-${id}`);
-  const open = body.classList.contains('open');
-  body.classList.toggle('open', !open);
-  if (arrow) arrow.style.transform = open ? '' : 'rotate(180deg)';
+// ── Rafraîchir les statistiques ──
+function _refreshLangStats() {
+  ['fr','en','de'].forEach(l => {
+    const saved = JSON.parse(localStorage.getItem(`lang_quiz_${l}`) || 'null');
+    const el = document.getElementById(`stat-${l}-score`);
+    const prog = document.getElementById(`prog-${l}`);
+    if (saved && el) {
+      el.textContent = `${saved.best}%`;
+      if (prog) prog.style.width = `${saved.best}%`;
+    }
+  });
+  // Total quiz joués
+  const total = ['fr','en','de'].reduce((acc, l) => {
+    const s = JSON.parse(localStorage.getItem(`lang_quiz_${l}`) || '{}');
+    return acc + (s.count || 0);
+  }, 0);
+  const tot = document.getElementById('stat-total-quizzes');
+  if (tot) tot.textContent = total;
 }
 
-function filterMethodo(q) {
-  if (!q.trim()) { _renderMethodoCards(METHODO_DATA); return; }
-  const filtered = METHODO_DATA.filter(m =>
-    m.title.toLowerCase().includes(q.toLowerCase()) ||
-    m.steps.some(s => s.c.toLowerCase().includes(q.toLowerCase()))
-  );
-  _renderMethodoCards(filtered);
+// ── Ouvrir le quiz ──
+function openLangQuiz(langCode) {
+  const data = LANG_QUIZ[langCode];
+  if (!data) return;
+
+  // Mélanger et prendre 10 questions
+  const shuffled = [...data.questions].sort(() => Math.random() - 0.5).slice(0, 10);
+  _quizState = { lang: langCode, idx: 0, score: 0, answered: false, questions: shuffled };
+
+  // Mettre à jour le header
+  document.getElementById('quiz-modal-flag').textContent = data.flag;
+  document.getElementById('quiz-modal-title').textContent = data.name;
+  document.getElementById('quiz-score-badge').textContent = 'Score: 0';
+  document.getElementById('quiz-progress-bar').style.width = '0%';
+  document.getElementById('quiz-next-btn').disabled = true;
+  document.getElementById('quiz-next-btn').style.opacity = '0.4';
+  document.getElementById('quiz-next-btn').textContent = 'Question suivante →';
+
+  // Afficher la 1ère question
+  _renderQuizQuestion();
+
+  // Ouvrir le modal
+  const modal = document.getElementById('langQuizModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
 
-function askAboutMethodo(title) {
-  switchTab('chat');
-  document.getElementById('userInput').value = `Explique-moi comment appliquer la méthode "${title}" avec un exemple concret pour le BAC marocain.`;
-  sendMessage();
+// ── Fermer le quiz ──
+function closeLangQuiz() {
+  document.getElementById('langQuizModal').style.display = 'none';
+  document.body.style.overflow = '';
 }
 
-// ════════════════════════════════════════════════════════════════
-//  FEATURE: ORIENTATION POST-BAC
-// ════════════════════════════════════════════════════════════════
-function initOrientationTab() {}
+// ── Afficher une question ──
+function _renderQuizQuestion() {
+  const { idx, questions, lang } = _quizState;
+  const q = questions[idx];
+  if (!q) return;
 
-async function generateOrientation() {
-  const filiere = document.getElementById('orient-filiere')?.value;
-  const moyenne = document.getElementById('orient-moyenne')?.value || '14';
-  const matieres = document.getElementById('orient-matieres')?.value || 'Maths, Physique';
-  const domaine = document.getElementById('orient-domaine')?.value;
-  const result = document.getElementById('orientation-result');
-  result.innerHTML = '<div style="text-align:center;padding:20px;color:var(--muted);">🤖 Analyse en cours (Gemini)...</div>';
+  const letters = ['A','B','C','D'];
+  const color = LANG_QUIZ[lang].color;
 
-  const prompt = `Tu es un conseiller d'orientation expert pour les bacheliers marocains.
-Profil de l'étudiant:
-- Filière BAC: ${filiere}
-- Moyenne: ${moyenne}/20
-- Matières préférées: ${matieres}
-- Domaine d'intérêt: ${domaine}
+  document.getElementById('quiz-modal-progress-txt').textContent =
+    `Question ${idx + 1} / ${questions.length}`;
+  document.getElementById('quiz-progress-bar').style.width =
+    `${(idx / questions.length) * 100}%`;
 
-Donne-moi:
-1. Top 5 établissements recommandés au Maroc (CPGE, ENSA, ENCG, FSSM, FSJES, etc.) avec conditions d'accès
-2. 3 filières alternatives si la première est compétitive
-3. Conseils personnalisés pour les concours (calendrier, matières à réviser)
-4. Erreurs à éviter dans le dossier d'inscription
+  document.getElementById('quiz-question-area').innerHTML = `
+    <div style="margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;color:${color};text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">
+        Question ${idx + 1}
+      </div>
+      <div style="font-size:14.5px;font-weight:600;color:var(--text);line-height:1.7;">
+        ${q.q}
+      </div>
+    </div>
+    <div id="quiz-options">
+      ${q.opts.map((opt, i) => `
+        <button class="quiz-option" onclick="selectQuizAnswer(${i})" id="qopt-${i}">
+          <span class="quiz-opt-letter">${letters[i]}</span>
+          <span>${opt}</span>
+        </button>`).join('')}
+    </div>
+    <div id="quiz-explanation" style="display:none;margin-top:14px;padding:12px 14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.2);border-radius:10px;font-size:12px;color:var(--accent2);line-height:1.7;">
+      💡 <strong>Explication :</strong> ${q.exp}
+    </div>`;
 
-Réponds en français, de façon structurée et encourageante.`;
+  _quizState.answered = false;
+}
 
+// ── Sélectionner une réponse ──
+function selectQuizAnswer(chosenIdx) {
+  if (_quizState.answered) return;
+  _quizState.answered = true;
+
+  const { idx, questions, score } = _quizState;
+  const q = questions[idx];
+  const isCorrect = chosenIdx === q.ans;
+
+  // Désactiver tous les boutons
+  for (let i = 0; i < q.opts.length; i++) {
+    const btn = document.getElementById(`qopt-${i}`);
+    if (!btn) continue;
+    btn.disabled = true;
+    if (i === q.ans) btn.classList.add('correct');
+    else if (i === chosenIdx && !isCorrect) btn.classList.add('wrong');
+  }
+
+  // Mise à jour score
+  if (isCorrect) {
+    _quizState.score = score + 1;
+    showToast('✅ Bonne réponse !');
+  } else {
+    showToast('❌ Mauvaise réponse — voir l\'explication');
+  }
+
+  const pct = Math.round((_quizState.score / questions.length) * 100);
+  document.getElementById('quiz-score-badge').textContent = `Score: ${_quizState.score}`;
+
+  // Afficher explication
+  const expEl = document.getElementById('quiz-explanation');
+  if (expEl) expEl.style.display = 'block';
+
+  // Activer le bouton suivant
+  const nextBtn = document.getElementById('quiz-next-btn');
+  nextBtn.disabled = false;
+  nextBtn.style.opacity = '1';
+
+  // Dernier question → changer texte
+  if (idx + 1 >= questions.length) {
+    nextBtn.textContent = '🏆 Voir mes résultats';
+  }
+}
+
+// ── Question suivante / Résultats ──
+function quizNextQuestion() {
+  const { idx, questions, score, lang } = _quizState;
+
+  if (idx + 1 >= questions.length) {
+    // Fin du quiz — afficher résultats
+    _showQuizResults();
+    return;
+  }
+
+  _quizState.idx = idx + 1;
+  document.getElementById('quiz-next-btn').disabled = true;
+  document.getElementById('quiz-next-btn').style.opacity = '0.4';
+  _renderQuizQuestion();
+}
+
+// ── Afficher les résultats finaux ──
+function _showQuizResults() {
+  const { score, questions, lang } = _quizState;
+  const total = questions.length;
+  const pct = Math.round((score / total) * 100);
+  const color = LANG_QUIZ[lang].color;
+
+  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '⭐' : pct >= 40 ? '💪' : '📚';
+  const msg   = pct >= 80 ? 'Excellent ! Vous maîtrisez bien cette langue.'
+              : pct >= 60 ? 'Bien ! Continuez à pratiquer.'
+              : pct >= 40 ? 'Pas mal, mais il faut réviser.'
+              : 'Il faut travailler davantage — ne vous découragez pas !';
+
+  document.getElementById('quiz-progress-bar').style.width = '100%';
+  document.getElementById('quiz-modal-progress-txt').textContent = 'Quiz terminé !';
+
+  document.getElementById('quiz-question-area').innerHTML = `
+    <div style="text-align:center;padding:20px 0;">
+      <div style="font-size:56px;margin-bottom:12px;">${emoji}</div>
+      <div style="font-size:36px;font-weight:900;color:${color};margin-bottom:6px;">${pct}%</div>
+      <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;">${score} / ${total} bonnes réponses</div>
+      <div style="font-size:12.5px;color:var(--muted);line-height:1.7;max-width:360px;margin:0 auto 24px;">${msg}</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button onclick="openLangQuiz('${lang}')"
+          style="padding:10px 20px;background:linear-gradient(135deg,${color},${color}99);border:none;border-radius:10px;color:#000;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">
+          🔄 Recommencer
+        </button>
+        <button onclick="closeLangQuiz()"
+          style="padding:10px 20px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Tajawal',sans-serif;font-size:13px;cursor:pointer;">
+          ✓ Fermer
+        </button>
+      </div>
+    </div>`;
+
+  // Masquer bouton suivant
+  const nextBtn = document.getElementById('quiz-next-btn');
+  nextBtn.style.display = 'none';
+
+  // Sauvegarder le score
+  saveQuizScore(lang, pct);
+  _refreshLangStats();
+}
+
+// ── Sauvegarder le score dans Firebase Firestore + localStorage ──
+async function saveQuizScore(langCode, scorePct) {
+  // 1. localStorage (toujours disponible)
+  const key = `lang_quiz_${langCode}`;
+  const prev = JSON.parse(localStorage.getItem(key) || '{}');
+  const updated = {
+    best:      Math.max(prev.best || 0, scorePct),
+    last:      scorePct,
+    count:     (prev.count || 0) + 1,
+    updatedAt: Date.now(),
+  };
+  localStorage.setItem(key, JSON.stringify(updated));
+
+  // 2. Firebase Firestore (si l'utilisateur est connecté)
+  if (!currentUser) return;
   try {
-    const res = await _callAPI('gemini', MODELS.gemini.main, [{role:'user',content:prompt}], 1200, 0.5);
-    result.innerHTML = `
-      <div style="background:var(--surface);border:1px solid rgba(34,211,238,0.2);border-radius:14px;padding:18px;">
-        <div style="font-size:12px;font-weight:700;color:var(--accent2);margin-bottom:12px;">🎓 Analyse de votre profil — ${filiere}</div>
-        <div style="font-size:12.5px;line-height:1.9;">${formatText(res)}</div>
-        <button onclick="switchTab('chat');document.getElementById('userInput').value='Je souhaite plus d\\'infos sur les concours d\\'accès aux grandes écoles marocaines pour un bachelier en ${filiere} avec ${moyenne}/20';sendMessage();" style="margin-top:14px;padding:9px 16px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.25);border-radius:8px;color:var(--accent2);font-family:'Tajawal',sans-serif;font-size:12px;cursor:pointer;">💬 Approfondir avec l'IA</button>
-      </div>`;
+    const FB = window.FirebaseREST;
+    await FB.setDoc(`users/${currentUser.uid}/quiz_scores/${langCode}`, {
+      lang:      langCode,
+      bestScore: updated.best,
+      lastScore: scorePct,
+      quizCount: updated.count,
+      timestamp: Date.now(),
+    });
+    console.log(`[Quiz] Score sauvegardé — ${langCode}: ${scorePct}%`);
   } catch(e) {
-    result.innerHTML 
+    console.warn('[Quiz] Erreur Firebase saveQuizScore:', e.message);
+  }
+}
+
+// Fermer le quiz en cliquant en dehors
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('langQuizModal');
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeLangQuiz();
+    });
+  }
+});
+</script>
+
+<!-- MOBILE SUBJECT DRAWER -->
+<div class="low-data-badge" id="lowDataBadge">📡 وضع اقتصادي</div>
+<button class="mob-subj-btn" id="mobSubjBtn" onclick="openDrawer()" title="اختر المادة">📚</button>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="subject-drawer" id="subjectDrawer">
+  <div class="drawer-handle"></div>
+  <div class="drawer-head">
+    <h3>📚 اختر المادة</h3>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</div>
+
+
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="loginScreen" style="display:none;">
+  <div id="setupBanner">
+    ⚙️ يجب إعداد Firebase أولاً — اضغط <strong style="cursor:pointer;text-decoration:underline;" onclick="document.getElementById('firebaseSetup').style.display='flex'">هنا للإعداد</strong>
+  </div>
+
+  <div class="login-logo-wrap">
+    <div class="login-logo" style="padding:0;overflow:hidden;"><img src="data:image/jpeg;base64,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" alt="BAC MAROC" style="width:100%;height:100%;object-fit:cover;border-radius:20px;"></div>
+    <h1 class="login-title">BAC MAROC</h1>
+    <p class="login-sub">سجّل دخولك للحفظ السحابي — أو تابع كزائر بدون قيود</p>
+  </div>
+
+  <div class="login-card">
+    <!-- Google Sign In -->
+    <button id="googleSignInBtn" onclick="signInWithGoogle()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 20px;background:#fff;border:none;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;color:#333;font-family:'Tajawal',sans-serif;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.15);margin-bottom:16px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      تسجيل الدخول بـ Google
+    </button>
+    <!-- مؤشر تحميل Firebase -->
+    <div id="fbLoadingBar" style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:6px;">
+      <span id="fbLoadDot" style="width:6px;height:6px;border-radius:50%;background:var(--accent3);display:inline-block;animation:pulse 1.2s infinite;"></span>
+      <span id="fbLoadTxt">جاري تحميل Firebase...</span>
+    </div>
+
+    <!-- Divider -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+      <span style="font-size:11px;color:var(--muted);">أو</span>
+      <div style="flex:1;height:1px;background:var(--border);"></div>
+    </div>
+
+    <!-- Guest Mode Button -->
+    <button onclick="continueAsGuest()" class="guest-btn">
+      👤 متابعة كزائر (بدون حفظ)
+    </button>
+
+    <!-- Benefits -->
+    <div class="login-benefits">
+      <p class="login-benefits-title">✅ مزايا تسجيل الدخول:</p>
+      <ul class="login-benefits-list">
+        <li>☁️ حفظ المحادثات على السحابة</li>
+        <li>⭐ مزامنة المفضلة على جميع أجهزتك</li>
+        <li>📊 تتبع تقدمك الدراسي</li>
+        <li>🔔 تنبيهات المذاكرة الشخصية</li>
+      </ul>
+    </div>
+
+    <!-- Loading -->
+    <div id="loginLoading" style="display:none;text-align:center;padding:16px;">
+      <div class="login-spinner"></div>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px;">جاري تسجيل الدخول...</p>
+    </div>
+
+    <!-- Error -->
+    <div id="loginError" class="login-error" style="display:none;"></div>
+  </div>
+
+  <p style="text-align:center;font-size:10px;color:var(--muted);margin-top:16px;">
+    🔒 نستخدم Google OAuth الآمن — لا نحفظ كلمات المرور
+  </p>
+</div>
+
+<!-- ══ FIREBASE SETUP MODAL ══ -->
+<div id="firebaseSetup" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.8);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <h3 style="font-size:15px;font-weight:700;color:var(--accent);">⚙️ إعداد Firebase</h3>
+      <button onclick="document.getElementById('firebaseSetup').style.display='none'" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;">✕</button>
+    </div>
+
+    <div style="background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.2);border-radius:10px;padding:14px;margin-bottom:18px;font-size:12px;color:var(--muted);line-height:1.9;">
+      <strong style="color:var(--accent2);">📋 خطوات الإعداد:</strong><br>
+      1. اذهب إلى <a href="https://console.firebase.google.com" target="_blank" style="color:var(--accent);">console.firebase.google.com</a><br>
+      2. أنشئ مشروعاً جديداً<br>
+      3. فعّل Authentication → Google<br>
+      4. أضف الدومين المستضاف في Authorized domains<br>
+      5. انسخ بيانات المشروع من Project Settings<br>
+      6. الصق البيانات أدناه
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
+      <input id="fb-apiKey" placeholder="apiKey" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:12px;font-family:monospace;outline:none;width:100%;">
+      <input id="fb-authDomain" placeholder="authDomain (yourapp.firebaseapp.com)" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:12px;font-family:monospace;outline:none;width:100%;">
+      <input id="fb-projectId" placeholder="projectId" style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:12px;font-family:monospace;outline:none;width:100%;">
+    </div>
+
+    <div style="display:flex;gap:8px;">
+      <button onclick="saveFirebaseConfig()" style="flex:1;padding:11px;background:linear-gradient(135deg,var(--accent),#16a34a);border:none;border-radius:10px;color:#000;font-weight:700;font-size:13px;cursor:pointer;font-family:'Tajawal',sans-serif;">💾 حفظ وتفعيل</button>
+      <button onclick="document.getElementById('firebaseSetup').style.display='none'" style="padding:11px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:13px;cursor:pointer;font-family:'Tajawal',sans-serif;">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- User Profile Dropdown -->
+<div id="userDropdown">
+  <div class="user-dd-head">
+    <img id="userAvatarDropdown" src="" alt="صورة المستخدم" onerror="this.style.display='none'">
+    <div>
+      <div id="userNameDropdown" style="font-size:13px;font-weight:700;color:var(--text);"></div>
+      <div id="userEmailDropdown" style="font-size:10px;color:var(--muted);"></div>
+    </div>
+  </div>
+  <div class="user-dd-actions">
+    <button class="user-dd-btn" onclick="switchTab('analytics');closeDropdown()">📊 إحصائياتي</button>
+    <button class="user-dd-btn" onclick="switchTab('favorites');closeDropdown()">⭐ مفضلتي</button>
+    <button class="user-dd-btn" onclick="openApiSetupModal();closeDropdown()">🔑 مفاتيح AI</button>
+    <button class="user-dd-btn danger" onclick="signOutUser()">🚪 تسجيل الخروج</button>
+  </div>
+</div>
+
+<!-- ══ API KEYS SETUP MODAL ══ -->
+<div id="apiSetupModal" style="display:none;position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+      <h3 style="font-size:15px;font-weight:700;color:var(--accent);">🔑 مفاتيح الذكاء الاصطناعي</h3>
+      <button onclick="closeApiSetupModal()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;">✕</button>
+    </div>
+
+    <!-- شرح الخيارات -->
+    <div style="background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:11.5px;color:var(--muted);line-height:2;">
+      <strong style="color:var(--accent);">✅ التطبيق يعمل بدون إعداد</strong> — المفاتيح الافتراضية نشطة.<br>
+      <strong style="color:var(--accent2);">⚡ هل تريد مفاتيحك الخاصة؟</strong> (اختياري — للاستخدام المكثف)<br>
+      • <a href="https://console.groq.com/keys" target="_blank" style="color:var(--accent2);">console.groq.com/keys</a> ← مفتاح Groq مجاني<br>
+      • <a href="https://openrouter.ai/keys" target="_blank" style="color:var(--accent2);">openrouter.ai/keys</a> ← مفتاح OpenRouter مجاني
+    </div>
+
+    <!-- Groq Key -->
+    <div style="margin-bottom:12px;">
+      <label style="font-size:11px;color:var(--accent);font-weight:700;display:block;margin-bottom:5px;">
+        ⚡ Groq API Key <span style="color:var(--muted);font-weight:400;">(الأسرع — موصى به)</span>
+      </label>
+      <div style="position:relative;">
+        <input id="api-gr-key" type="password" placeholder="gsk_xxxxxxxxxxxxxxxxxxxxxxxx"
+          style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 40px 10px 12px;color:var(--text);font-size:12px;font-family:monospace;outline:none;box-sizing:border-box;"
+          oninput="validateKeyInput(this,'gsk_','gr-status')">
+        <button onclick="toggleKeyVisibility('api-gr-key',this)" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;">👁</button>
+      </div>
+      <span id="gr-status" style="font-size:10px;margin-top:3px;display:block;"></span>
+    </div>
+
+    <!-- OpenRouter Key -->
+    <div style="margin-bottom:16px;">
+      <label style="font-size:11px;color:var(--accent2);font-weight:700;display:block;margin-bottom:5px;">
+        🌐 OpenRouter API Key <span style="color:var(--muted);font-weight:400;">(نماذج متعددة مجانية)</span>
+      </label>
+      <div style="position:relative;">
+        <input id="api-or-key" type="password" placeholder="sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxx"
+          style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 40px 10px 12px;color:var(--text);font-size:12px;font-family:monospace;outline:none;box-sizing:border-box;"
+          oninput="validateKeyInput(this,'sk-or-','or-status')">
+        <button onclick="toggleKeyVisibility('api-or-key',this)" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;">👁</button>
+      </div>
+      <span id="or-status" style="font-size:10px;margin-top:3px;display:block;"></span>
+    </div>
+
+    <!-- Proxy URL (اختياري) -->
+    <details style="margin-bottom:16px;">
+      <summary style="font-size:11px;color:var(--muted);cursor:pointer;padding:6px 0;">⚙️ خيار متقدم: Cloudflare Worker URL (للنشر الآمن بالكامل)</summary>
+      <div style="margin-top:8px;">
+        <input id="api-proxy-url" type="url" placeholder="https://ai-proxy.your-name.workers.dev"
+          style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:11px;font-family:monospace;outline:none;box-sizing:border-box;">
+        <p style="font-size:10px;color:var(--muted);margin-top:4px;">بعد نشر Cloudflare Worker، أدخل الـ URL هنا — ستختفي الحاجة للمفاتيح في المتصفح تماماً</p>
+      </div>
+    </details>
+
+    <!-- أزرار -->
+    <div style="display:flex;gap:8px;">
+      <button onclick="saveApiKeys()" style="flex:1;padding:11px;background:linear-gradient(135deg,var(--accent),#16a34a);border:none;border-radius:10px;color:#000;font-weight:700;font-size:13px;cursor:pointer;font-family:'Tajawal',sans-serif;">💾 حفظ والبدء</button>
+      <button onclick="clearApiKeys()" style="padding:11px 14px;background:rgba(248,81,73,0.1);border:1px solid rgba(248,81,73,0.3);border-radius:10px;color:var(--danger);font-size:12px;cursor:pointer;font-family:'Tajawal',sans-serif;">🗑️ مسح</button>
+      <button onclick="closeApiSetupModal()" style="padding:11px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Tajawal',sans-serif;">إلغاء</button>
+    </div>
+
+    <p style="text-align:center;font-size:10px;color:var(--muted);margin-top:12px;">
+      🔒 المفاتيح مُشفّرة في <code>localStorage</code> — لا تُرسل لأي خادم خارجي
+    </p>
+  </div>
+</div>
+
+<script>
+function validateKeyInput(input, prefix, statusId) {
+  const val = input.value.trim();
+  const status = document.getElementById(statusId);
+  if (!status) return;
+  if (!val) { status.textContent = ''; input.style.borderColor = ''; return; }
+  if (val.startsWith(prefix) && val.length > 20) {
+    status.textContent = '✅ مفتاح صحيح';
+    status.style.color = 'var(--accent)';
+    input.style.borderColor = 'rgba(74,222,128,0.5)';
+  } else {
+    status.textContent = `⚠️ يجب أن يبدأ بـ "${prefix}"`;
+    status.style.color = 'var(--danger)';
+    input.style.borderColor = 'rgba(248,81,73,0.5)';
+  }
+}
+function toggleKeyVisibility(inputId, btn) {
+  const inp = document.getElementById(inputId);
+  if (!inp) return;
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+  btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+}
+</script>
+
+</body>
+</html>
+
